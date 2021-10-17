@@ -11,7 +11,7 @@ namespace S32X4L_HFT_2021221.Models
     [Table("CustomerInfo")]
     public class CustomerInfo
     {
-       
+
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,13 +20,11 @@ namespace S32X4L_HFT_2021221.Models
         [MaxLength(50)]
         [Required]
         public string Name { get; set; }
-
-        public DateTime JoinDate { get; set; }
-        public CustomerInfo(int iD, string name, DateTime joinDate)
+        public virtual ICollection<DVD> RentedDVDs { get; set; }
+    
+        public CustomerInfo()
         {
-            ID = iD;
-            Name = name;
-            JoinDate = joinDate;
+         RentedDVDs = new HashSet<DVD>();
         }
 
     }

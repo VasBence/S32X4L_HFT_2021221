@@ -24,23 +24,18 @@ namespace S32X4L_HFT_2021221.Models
         [MaxLength(50)]
         [Required]
         public string Title { get; set; }
-        public DateTime Length {  get; set; }
-        [MaxLength(50)]
-        [Required]
-        public string Director {  get; set; }    
-        public Genre Genre { get; set; }
-        [Required]
-        public int RentCost { get; set; }     
-        public int LateFee { get; set; }
-        public DVD(int iD, string title, DateTime length, string director, Genre genre, int rentCost, int lateFee)
+        public int Length { get; set; }
+        public Genre Genre { get; set; } 
+
+        public virtual ICollection<CustomerInfo> CustomerWhoRentedID { get; set; }
+
+        [ForeignKey(nameof(Store))]
+        public int StoreID { get; set; }
+        public virtual DVDstore Store { get; set; }
+
+        public DVD()
         {
-            ID = iD;
-            Title = title;
-            Length = length;
-            Director = director;
-            Genre = genre;
-            RentCost = rentCost;
-            LateFee = lateFee;
+        CustomerWhoRentedID = new HashSet<CustomerInfo>();
         }
 
     }
