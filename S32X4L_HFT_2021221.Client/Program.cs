@@ -5,16 +5,20 @@ using System.Linq;
 
 namespace S32X4L_HFT_2021221.Client
 {
-    internal class Program
+    public class Program
     {
-        static void Main(string[] args)      
+        static void Main(string[] args)
         {
 
-            DVDDbContext dbcontext = new DVDDbContext();
+            EgyetemDbContext dbcontext = new EgyetemDbContext();
+            ;
+
            
-            var costumers = dbcontext.CustomerInfos.ToArray();
-            var costumers1 = dbcontext.DVDs.ToArray();
-            var costumers2 = dbcontext.DVDstore.ToArray();
+
+                   
+           
+
+            Console.ReadKey();
 
         }
     }

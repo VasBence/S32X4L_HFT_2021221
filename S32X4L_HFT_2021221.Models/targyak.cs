@@ -8,24 +8,28 @@ using System.Threading.Tasks;
 
 namespace S32X4L_HFT_2021221.Models
 {
-    [Table("CustomerInfo")]
-    public class CustomerInfo
+  
+
+    [Table("targyak")]
+    public class targyak
     {
 
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int TargyID { get; set; }
 
         [MaxLength(50)]
         [Required]
-        public string Name { get; set; }
-        public virtual ICollection<DVD> RentedDVDs { get; set; }
-    
-        public CustomerInfo()
-        {
-         RentedDVDs = new HashSet<DVD>();
-        }
+        public string TargyNev { get; set; }
 
+        public int Kredit { get; set; }
+
+        public virtual ICollection<kurzusok> TargyKurzusok { get; set; }
+
+        public targyak()
+        {
+            TargyKurzusok = new HashSet<kurzusok>();
+        }
     }
 }
