@@ -11,25 +11,25 @@ namespace S32X4L_HFT_2021221.Models
   
 
     [Table("targyak")]
-    public class targyak
+    public class Subjects
     {
 
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int TargyID { get; set; }
+        public int SubjectID { get; set; }
 
         [MaxLength(50)]
         [Required]
-        public string TargyNev { get; set; }
+        public string Name { get; set; }
 
-        public int Kredit { get; set; }
+        public int Credit { get; set; }
 
-        public virtual ICollection<kurzusok> TargyKurzusok { get; set; }
+        public virtual ICollection<Courses> SubjectCourses { get; set; }
 
-        public targyak()
+        public Subjects()
         {
-            TargyKurzusok = new HashSet<kurzusok>();
+            SubjectCourses = new HashSet<Courses>();
         }
     }
 }
