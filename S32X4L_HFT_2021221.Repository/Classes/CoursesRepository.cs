@@ -33,9 +33,9 @@ namespace S32X4L_HFT_2021221.Repository
 
         }
 
-        public IList<Courses> GetAll()
+        public IQueryable<Courses> GetAll()
         {
-            return null;
+            return db.courses;
         }
 
         public void UpdateTeacherName(int id, string name)

@@ -14,17 +14,17 @@ namespace S32X4L_HFT_2021221.Client
 
             UniDbContext dbcontext = new UniDbContext();
 
-            StudentsRepository tan = new StudentsRepository();
+            StudentsRepository tan = new StudentsRepository(dbcontext);
+            CoursesRepository courses = new CoursesRepository(dbcontext);
            
-            Courses courses = new Courses();
+            
             CoursesLogic coursesLogic = new CoursesLogic();
 
             tan.UpdateAge("S32X4L", 15);
-            co.ReadOne(courses.CourseID =1);
-       
-            foreach (Students student in coursesLogic.GetAllStudents())
-                Console.WriteLine(student.Name);
+            var Readall = tan.GetAll();
+            var readallcourses = courses.GetAll();
             ;
+            
 
 
            

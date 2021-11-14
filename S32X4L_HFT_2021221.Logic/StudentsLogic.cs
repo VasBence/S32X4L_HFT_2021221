@@ -27,7 +27,7 @@ namespace S32X4L_HFT_2021221.Logic
         }
         public List<Students> ReadAll()
         {
-            return studentsRepository.ReadAll().ToList();
+            return studentsRepository.GetAll().ToList();
         }
         public void DeleteStudent(string id)
         {

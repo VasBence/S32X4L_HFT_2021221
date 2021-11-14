@@ -10,7 +10,11 @@ namespace S32X4L_HFT_2021221.Repository
 {
     public class StudentsRepository : IStudentsRepository
     {
-        UniDbContext db = new UniDbContext();
+        UniDbContext db;
+        public StudentsRepository(UniDbContext db)
+        {
+            this.db = new UniDbContext();
+        }
         public void Create(Students student)
         {
             db.students.Add(student);
@@ -26,7 +30,7 @@ namespace S32X4L_HFT_2021221.Repository
             return db.students.Find(id);
 
         }
-        public IQueryable<Students> ReadAll()
+        public IQueryable<Students> GetAll()
         {
             return db.students;
         }

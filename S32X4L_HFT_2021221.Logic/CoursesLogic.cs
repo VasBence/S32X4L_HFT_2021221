@@ -9,7 +9,7 @@ namespace S32X4L_HFT_2021221.Logic
     public interface ICoursesLogic
     {
         public void ChangeTeacherName(int id, string name);
-        public IList<Courses> GetAllCourses();
+        public IQueryable<Courses> GetAllCourses();
         public void DeleteCourse(int id);
         public Courses ReadOneCourse(int id);
 
@@ -38,9 +38,9 @@ namespace S32X4L_HFT_2021221.Logic
         {
             return courseRepo.ReadOne(id);
         }
-        public IList<Courses> GetAllCourses()
+        public IQueryable<Courses> GetAllCourses()
         {
-            var courses = courseRepo.ReadAll();
+            var courses = courseRepo.GetAll();
 
             return courses;
         }
@@ -57,7 +57,7 @@ namespace S32X4L_HFT_2021221.Logic
            
         public IEnumerable<Students> GetAllStudents()
         {
-            var repoRead = courseRepo.ReadAll();
+            var repoRead = courseRepo.GetAll();
             var students = repoRead.SelectMany(x => x.Students).Distinct().ToList();
             return students;
              
