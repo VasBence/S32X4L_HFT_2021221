@@ -132,22 +132,38 @@ namespace S32X4L_HFT_2021221.Test
         [Test]
         [TestCase(1,7)]
       
-        public void Update_Credit_For_Subjects(int id, int credit)
+        public void Update_Credit_For_Subjects(int id, int credit)  //6
         {
            
 
             Assert.That(()=> subjectsLogic.UpdateCredit(id,credit), Throws.TypeOf<ArgumentException>());
-        }   //6
+        }  
 
         [Test]
-        public void Read_One_Subject_IsWorking()
+        [TestCase(1, 6)]
+        public void Update_Credit_For_Subjects_With_Right_Values(int id, int credit) //7
+        {
+           
+            Assert.That(() => subjectsLogic.UpdateCredit(id, credit), Throws.Nothing);
+        }   
+
+        [Test]
+        public void Read_One_Subject_IsWorking() //8
         {
             Assert.That(subjectsLogic.ReadOneSubject(1).SubjectID, Is.EqualTo(1));
             Assert.That(subjectsLogic.ReadOneSubject(1).Credit, Is.EqualTo(6));
+            
+        }
+        [Test]
+        public void Read_One_Subject_IsWorking_With_False_Data() //9
+        {
+            Assert.That(subjectsLogic.ReadOneSubject(1).SubjectID, Is.Not.EqualTo(2));
+            Assert.That(subjectsLogic.ReadOneSubject(1).Credit, Is.Not.EqualTo(7));
+
         }
 
         [Test]
-        public void Teacher_Courses_Count()
+        public void Teacher_Courses_Count()//10
         {
             var readed = subjectsLogic.GetCoursesCountFromSubjects();
             List<CoursesCountFromSubjects> subjects = new List<CoursesCountFromSubjects>();
