@@ -7,13 +7,15 @@
   <ItemGroup>
     <None Remove="Database.mdf" />
     <None Remove="Database_log.ldf" />
+    <None Remove="Subjects.mdf" />
+    <None Remove="Subjects_log.ldf" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Database.mdf">
+    <Content Include="Subjects.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Database_log.ldf">
+    <Content Include="Subjects_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

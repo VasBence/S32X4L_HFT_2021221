@@ -13,8 +13,9 @@ namespace S32X4L_HFT_2021221.Models
     {
         [Key]
         public int CourseID { get; set; }
-        public string Teacher { get; set; }
-       
+
+        public string CourseName { get; set; }
+
         public virtual ICollection<Students> Students { get; set; }
 
         [ForeignKey(nameof(Subjects))]
@@ -24,7 +25,11 @@ namespace S32X4L_HFT_2021221.Models
         {
             Students = new HashSet<Students>();
         }
-       
+
+        [ForeignKey(nameof(Teacher))]
+        public int TeacherID { get; set; }
+        public virtual Teacher Teacher { get; set; }
+
 
     }
 }

@@ -5,10 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using S32X4L_HFT_2021221.Models;
 using S32X4L_HFT_2021221.Repository;
+using S32X4L_HFT_2021221.Data;
 
 namespace S32X4L_HFT_2021221.Logic
 {
-    public class StudentsLogic
+    public interface IStudentsLogic
+    {
+        void CreateStudent(Students students);
+        void DeleteStudent(string id);
+        IQueryable<Students> ReadAll();
+        Students ReadOneStudent(string id);
+        void UpdateStudentAge(string id, int age);
+        void UpdateStudentName(string id, string name);
+    }
+
+    public class StudentsLogic : IStudentsLogic
     {
         IStudentsRepository studentsRepository;
 
@@ -25,12 +36,17 @@ namespace S32X4L_HFT_2021221.Logic
         {
             return studentsRepository.ReadOne(id);
         }
-        public List<Students> ReadAll()
+        public IQueryable<Students> ReadAll()
         {
-            return studentsRepository.GetAll().ToList();
+            return studentsRepository.GetAll();
         }
         public void DeleteStudent(string id)
         {
+            if (id.Length != 6)
+            {
+                throw new Exception("The Neptun code should be 6 characters long! :C ");
+            }
+            else
             studentsRepository.Delete(id);
         }
         public void UpdateStudentAge(string id, int age)
@@ -41,5 +57,32 @@ namespace S32X4L_HFT_2021221.Logic
         {
             studentsRepository.UpdateName(id, name);
         }
+
+
+
+        //NONCRUD
+        public IQueryable<MaxCreditStudentFromAllCourses> GetMaxCreditStudent()
+        {
+            var repoRead = studentsRepository.GetAll();
+
+            var students2 =( from x in repoRead
+
+                            orderby x.AcquiredCredtis descending
+
+
+                            select new MaxCreditStudentFromAllCourses
+                            {
+                                NAME = x.Name,
+                                CREDITS = x.AcquiredCredtis
+                            }).Take(1);
+                           
+
+
+
+
+            return students2;
+        } // JÓ
+
+
     }
 }

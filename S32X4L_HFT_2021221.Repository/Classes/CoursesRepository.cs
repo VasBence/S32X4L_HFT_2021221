@@ -37,12 +37,5 @@ namespace S32X4L_HFT_2021221.Repository
         {
             return db.courses;
         }
-
-        public void UpdateTeacherName(int id, string name)
-        {
-            var oldCourse = ReadOne(id);
-            oldCourse.Teacher = name;
-            db.SaveChanges();
-        }
     }
 }

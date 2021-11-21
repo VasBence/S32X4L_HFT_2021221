@@ -13,6 +13,7 @@ namespace S32X4L_HFT_2021221.Data
         public virtual DbSet<Students> students { get; set; }
         public virtual DbSet<Subjects> subjects { get; set; }
         public virtual DbSet<Courses> courses { get; set; }
+        public virtual DbSet<Teacher> teacher { get; set; }
 
         public UniDbContext()
         {
@@ -24,7 +25,7 @@ namespace S32X4L_HFT_2021221.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True");
+                optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = |DataDirectory|\Subjects.mdf; Integrated Security = True");
             }
 
         }
@@ -67,22 +68,41 @@ namespace S32X4L_HFT_2021221.Data
                 .HasForeignKey(courses => courses.SubjectID)
                 .OnDelete(DeleteBehavior.Restrict);
 
+                entity
+                .HasOne(courses => courses.Teacher)
+                .WithMany(teacher => teacher.HoldedCourses)
+                .HasForeignKey(courses => courses.TeacherID)
+                .OnDelete(DeleteBehavior.Cascade);
+
             });
 
             Subjects anal2 = new Subjects() { SubjectID = 1, Name = "Analízis 2", Credit = 6 };
-            Subjects hft = new Subjects() { SubjectID = 2, Name = "Haladó Fejlesztési Technikák", Credit = 6 };
+            Subjects hft = new Subjects() { SubjectID = 2, Name = "Haladó Fejlesztési Technikák", Credit =3};
 
-            Courses htcourse1 = new Courses() { CourseID = 1, Teacher = "Sipos Miklós", SubjectID = 2 };
-            Courses hftcourse2 = new Courses() { CourseID = 2, Teacher = "Kovács András", SubjectID = 2 };
+            Teacher teacher = new Teacher() {TeacherID = 1, Age = 20, Name = "Kovács András" };
+            Teacher teacher2 = new Teacher() {TeacherID = 2, Age = 23, Name = "Miklós" };
+            Teacher teacher3 = new Teacher() { TeacherID = 3,Age = 50, Name = "Vajda István" };
 
-            Students vassbence = new Students() { NeptunCode = "S32X4L", Name = "Vass Bence", Age = 19, JoinedCourseID = 1};
+            Courses hftcourse1 = new Courses() { CourseID = 1,CourseName = "hftcourse2", SubjectID = hft.SubjectID , TeacherID = teacher.TeacherID };
+            Courses hftcourse2 = new Courses() { CourseID = 2,CourseName ="hftcourse1" ,  SubjectID = hft.SubjectID, TeacherID = teacher2.TeacherID };
+            Courses anal2course1 = new Courses() { CourseID = 3,CourseName ="anal2course1", SubjectID = anal2.SubjectID, TeacherID = teacher3.TeacherID };
+            Courses anal2course2 = new Courses() { CourseID = 4,CourseName ="anal2course2", SubjectID = anal2.SubjectID, TeacherID = teacher3.TeacherID };
+
+
+            
+
+            Students vassbenceanal2 = new Students() { NeptunCode = "S32X4L", Name = "BENCE", Age = 19, JoinedCourseID = anal2course1.CourseID, AcquiredCredtis = 30 };
+            Students vassbencehft = new Students() { NeptunCode = "S321AS", Name = "BENCEEE", Age = 19, JoinedCourseID = hftcourse1.CourseID, AcquiredCredtis = 30};
+            Students ferike = new Students() { NeptunCode = "IMGAY", Name = "FERENC", Age = 21, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 20};
+            Students ferike2 = new Students() { NeptunCode = "IMGAY2", Name = "FERENC2", Age = 22, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 210};
 
 
 
 
-            modelBuilder.Entity<Courses>().HasData(htcourse1, hftcourse2);
+            modelBuilder.Entity<Courses>().HasData(hftcourse1, hftcourse2, anal2course1, anal2course2);
             modelBuilder.Entity<Subjects>().HasData(anal2, hft);
-            modelBuilder.Entity<Students>().HasData(vassbence);
+            modelBuilder.Entity<Students>().HasData(vassbencehft,ferike, vassbenceanal2, ferike2);
+            modelBuilder.Entity<Teacher>().HasData(teacher, teacher2, teacher3);
 
             
 
