@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace S32X4L_HFT_2021221.Models
@@ -20,6 +21,8 @@ namespace S32X4L_HFT_2021221.Models
 
         [ForeignKey(nameof(Subjects))]
         public int SubjectID { get; set; }
+        [NotMapped]
+        [JsonIgnore]
         public virtual Subjects Subjects { get; set; }
         public Courses()
         {
@@ -28,6 +31,8 @@ namespace S32X4L_HFT_2021221.Models
 
         [ForeignKey(nameof(Teacher))]
         public int TeacherID { get; set; }
+        [NotMapped]
+        [JsonIgnore]
         public virtual Teacher Teacher { get; set; }
 
 

@@ -119,7 +119,7 @@ namespace S32X4L_HFT_2021221.Test
         public void GetAll_Method_Is_Reading_All_Objects()
         {
 
-            Assert.That(studentsLogic.ReadAll().Count() == 4);
+            Assert.That(studentsLogic.ReadAllStudents().Count() == 4);
         }           //4
 
         [Test]    
@@ -133,8 +133,7 @@ namespace S32X4L_HFT_2021221.Test
         [TestCase(1,7)]
       
         public void Update_Credit_For_Subjects(int id, int credit)  //6
-        {
-           
+        {   
 
             Assert.That(()=> subjectsLogic.UpdateCredit(id,credit), Throws.TypeOf<ArgumentException>());
         }  

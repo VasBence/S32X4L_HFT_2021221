@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace S32X4L_HFT_2021221.Repository.Classes
+namespace S32X4L_HFT_2021221.Repository
 {
     public class TeacherRepository : ITeacherRepository
     {
@@ -20,7 +20,7 @@ namespace S32X4L_HFT_2021221.Repository.Classes
             db.teacher.Add(teacher);
             db.SaveChanges();
         }
-        public void Delete(string id)
+        public void Delete(int id)
         {
             db.Remove(id);
             db.SaveChanges();

@@ -12,7 +12,7 @@ namespace S32X4L_HFT_2021221.Logic
     public interface ISubjectsLogic
     {
         void CreateSubject(Subjects subject);
-        void Delete(int id);
+        void DeleteSubject(int id);
         IQueryable<Subjects> ReadAllSubjects();
         Subjects ReadOneSubject(int id);
         void UpdateCredit(int id, int credit);
@@ -41,7 +41,7 @@ namespace S32X4L_HFT_2021221.Logic
         {
             return subjectsRepo.GetAll();
         }
-        public void Delete(int id)
+        public void DeleteSubject(int id)
         {
             subjectsRepo.Delete(id);
         }

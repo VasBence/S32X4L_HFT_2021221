@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace S32X4L_HFT_2021221.Models
@@ -24,6 +25,8 @@ namespace S32X4L_HFT_2021221.Models
 
         [ForeignKey(nameof(JoinedCourse))]
         public int JoinedCourseID { get; set; }
+        [NotMapped]
+        [JsonIgnore]
         public virtual Courses JoinedCourse { get; set; }
         
 

@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using S32X4L_HFT_2021221.Repository;
+using S32X4L_HFT_2021221.Logic;
+using S32X4L_HFT_2021221.Data;
 
 namespace S32X4L_HFT_2021221.Endpoint
 {
@@ -16,6 +19,18 @@ namespace S32X4L_HFT_2021221.Endpoint
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+
+            services.AddTransient<UniDbContext, UniDbContext>();
+            services.AddTransient<ICoursesLogic, CoursesLogic>();
+            services.AddTransient<IStudentsLogic, StudentsLogic>();
+            services.AddTransient<ISubjectsLogic, SubjectsLogic>();
+            services.AddTransient<ITeacherLogic, TeacherLogic>();
+
+            services.AddTransient<ICoursesRepository, CoursesRepository>();
+            services.AddTransient<IStudentsRepository, StudentsRepository>();
+            services.AddTransient<ISubjectsRepository, SubjectsRepository>();
+            services.AddTransient<ITeacherRepository, TeacherRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,10 +45,7 @@ namespace S32X4L_HFT_2021221.Endpoint
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }

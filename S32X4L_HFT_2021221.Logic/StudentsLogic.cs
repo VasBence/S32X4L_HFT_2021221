@@ -13,7 +13,7 @@ namespace S32X4L_HFT_2021221.Logic
     {
         void CreateStudent(Students students);
         void DeleteStudent(string id);
-        IQueryable<Students> ReadAll();
+        IQueryable<Students> ReadAllStudents();
         Students ReadOneStudent(string id);
         void UpdateStudentAge(string id, int age);
         void UpdateStudentName(string id, string name);
@@ -36,7 +36,7 @@ namespace S32X4L_HFT_2021221.Logic
         {
             return studentsRepository.ReadOne(id);
         }
-        public IQueryable<Students> ReadAll()
+        public IQueryable<Students> ReadAllStudents()
         {
             return studentsRepository.GetAll();
         }

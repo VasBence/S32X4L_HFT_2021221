@@ -9,7 +9,18 @@ using S32X4L_HFT_2021221.Data;
 
 namespace S32X4L_HFT_2021221.Logic
 {
-    public class TeacherLogic
+    public interface ITeacherLogic
+    {
+        void CreateTeacher(Teacher teacher);
+        void DeleteTeacher(int id);
+        IQueryable<Teacher> ReadAllTeacher();
+        Teacher ReadOneTeacher(int id);
+        IEnumerable<TeacherCoursesCount> TeacherCoursesCount(int id);
+        void UpdateTeacherAge(int id, int age);
+        void UpdateTeacherName(int id, string name);
+    }
+
+    public class TeacherLogic : ITeacherLogic
     {
         ITeacherRepository TeacherRepository;
         public TeacherLogic(ITeacherRepository repo)
@@ -24,11 +35,11 @@ namespace S32X4L_HFT_2021221.Logic
         {
             return TeacherRepository.ReadOne(id);
         }
-        public IQueryable<Teacher> ReadAll()
+        public IQueryable<Teacher> ReadAllTeacher()
         {
             return TeacherRepository.GetAll();
         }
-        public void DeleteStudent(string id)
+        public void DeleteTeacher(int id)
         {
             TeacherRepository.Delete(id);
         }
@@ -43,8 +54,8 @@ namespace S32X4L_HFT_2021221.Logic
 
         public IEnumerable<TeacherCoursesCount> TeacherCoursesCount(int id) //JÓ
         {
-  
-            var courses2 = from x in TeacherRepository.GetAll().Where(X=>X.TeacherID == id)
+
+            var courses2 = from x in TeacherRepository.GetAll().Where(X => X.TeacherID == id)
                            where x.HoldedCourses != null
 
                            select new TeacherCoursesCount

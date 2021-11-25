@@ -13,7 +13,9 @@ namespace S32X4L_HFT_2021221.Logic
         public IQueryable<Courses> GetAllCourses();
         public void DeleteCourse(int id);
         public Courses ReadOneCourse(int id);
+        public void CreateCourse(Courses course);
 
+        public void UdpateCourseName(int id, string name);
 
     }
 
@@ -49,11 +51,17 @@ namespace S32X4L_HFT_2021221.Logic
         {
             courseRepo.Delete(id);
         }
-     
+
+
+        void ICoursesLogic.UdpateCourseName(int id, string name)
+        {
+            courseRepo.UdpateCourseName(id, name);
+        }
+
 
         // NON-CRUD METH
-           
-    
+
+
         public IEnumerable<string> GetCourses(string askedsubjectcourses)
         {
             var readedRepo = courseRepo.GetAll();

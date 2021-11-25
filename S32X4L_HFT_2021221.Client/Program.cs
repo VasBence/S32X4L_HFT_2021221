@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using S32X4L_HFT_2021221.Repository;
 using S32X4L_HFT_2021221.Logic;
-using S32X4L_HFT_2021221.Repository.Classes;
+
 
 namespace S32X4L_HFT_2021221.Client
 {
@@ -37,7 +37,7 @@ namespace S32X4L_HFT_2021221.Client
             var readallcourses = coursesLogic.GetAllCourses();
 
             var studentreporeadone = tan.ReadOne("S32X4L");
-            var readallStudents = studentsLogic.ReadAll();
+            var readallStudents = studentsLogic.ReadAllStudents();
             var readoneStudent = studentsLogic.ReadOneStudent("S32X4L");
             
        
