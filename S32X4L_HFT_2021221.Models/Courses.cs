@@ -12,6 +12,8 @@ namespace S32X4L_HFT_2021221.Models
     [Table("COURSES")]
     public class Courses
     {
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int CourseID { get; set; }
 

@@ -15,8 +15,10 @@ namespace S32X4L_HFT_2021221.Logic
         void DeleteSubject(int id);
         IQueryable<Subjects> ReadAllSubjects();
         Subjects ReadOneSubject(int id);
-        void UpdateCredit(int id, int credit);
-        void UpdateSubjectName(int id, string name);
+        
+        void UpdateSubjectProps(Subjects subjects);
+
+        public IEnumerable<CoursesCountFromSubjects> GetCoursesFromSubjects();
     }
 
     public class SubjectsLogic : ISubjectsLogic
@@ -28,7 +30,7 @@ namespace S32X4L_HFT_2021221.Logic
             subjectsRepo = repo;
         }
 
-        //CRUD METHODS
+
         public void CreateSubject(Subjects subject)
         {
             subjectsRepo.Create(subject);
@@ -45,28 +47,19 @@ namespace S32X4L_HFT_2021221.Logic
         {
             subjectsRepo.Delete(id);
         }
-        public void UpdateSubjectName(int id, string name)
+        public void UpdateSubjectProps(Subjects subjects)
         {
-            subjectsRepo.UpdateSubjectName(id, name);
+            subjectsRepo.UpdateSubjectProps(subjects);
         }
-        public void UpdateCredit(int id, int credit)
-        {
-            if (credit >6)
-            {
-                throw new ArgumentException("Credit need to be smaller or equal to 6");
+       
 
-            }
-            else subjectsRepo.UpdateCredit(id, credit);
-
-        }
-
-        //non CRUD
-        public IEnumerable<CoursesCountFromSubjects> GetCoursesCountFromSubjects()
+ 
+        public IEnumerable<CoursesCountFromSubjects> GetCoursesFromSubjects() 
         {
             var readedRepo = subjectsRepo.GetAll();
             var coursescount = readedRepo.Where(x => x.SubjectCourses.Count != 0).Select(x => new CoursesCountFromSubjects
             {
-                NAME = x.SubjectCourses,
+                COUNT = x.SubjectCourses.Count,
                 SUBJECT = x.Name
             }); 
                
@@ -75,6 +68,8 @@ namespace S32X4L_HFT_2021221.Logic
            
                                
             return coursescount;
-        } //JÓ
+        } 
+
+        
     }
 }

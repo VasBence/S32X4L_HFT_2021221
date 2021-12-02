@@ -15,7 +15,7 @@ namespace S32X4L_HFT_2021221.Models
 
         [Key]
         public string NeptunCode { get; set; }
-
+        
         [MaxLength(50)]
         [Required]
         public string Name { get; set; }
@@ -32,5 +32,22 @@ namespace S32X4L_HFT_2021221.Models
 
       
 
+    }
+    public class StudentsWithTheLongestNameByEachCourse
+    {
+        public string CNAME { get; set; }
+        public string SNAME { get; set; }
+    }
+
+    public class GetEachStudentFor
+    {
+        public string TNAME { get; set; }
+        public string NAME { get; set; }
+    }
+    public class CoursesCountFromSubjects
+    {
+        public string SUBJECT { get; set; }
+
+        public int COUNT { get; set; }
     }
 }

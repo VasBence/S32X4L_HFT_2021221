@@ -10,7 +10,7 @@ namespace S32X4L_HFT_2021221.Repository
         void Delete(string id);
         Students ReadOne(string id);
         IQueryable<Students>GetAll();
-        public void UpdateName(string neptunCode, string name);
-        public void UpdateAge(string neptunCode, int Age);
+        public void UpdateStudentProps(Students students);
+    
     }
 }

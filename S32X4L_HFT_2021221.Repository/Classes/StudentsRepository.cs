@@ -22,7 +22,7 @@ namespace S32X4L_HFT_2021221.Repository
         }
         public void Delete(string id)
         {
-            db.Remove(id);
+            db.Remove(ReadOne(id));
             db.SaveChanges();
         }
         public Students ReadOne(string id)
@@ -34,22 +34,17 @@ namespace S32X4L_HFT_2021221.Repository
         {
             return db.students;
         }
-        public void UpdateAge(string neptunCode, int Age)
+      
+        public void UpdateStudentProps(Students students)
         {
-            var regitanulo = ReadOne(neptunCode);
-            ;
-         
-            regitanulo.Age = Age;
-          
-            db.SaveChanges();
-
-        }
-        public void UpdateName(string neptunCode, string Name)
-        {
-            var oldStudent = ReadOne(neptunCode);
-            oldStudent.Name = Name;
+            var oldStudent = ReadOne(students.NeptunCode);
+            oldStudent.Name = students.Name;
+            oldStudent.Age = students.Age;
+            oldStudent.AcquiredCredtis = students.AcquiredCredtis;
+           
         }
 
+        
      
     }
 }

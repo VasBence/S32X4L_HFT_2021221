@@ -30,19 +30,15 @@ namespace S32X4L_HFT_2021221.Repository
             db.Remove(ReadOne(id));
             db.SaveChanges();
         }
-        public void UpdateSubjectName(int subjectId, string subjectName)
+        public void UpdateSubjectProps(Subjects subjects)
         {
-            var oldSubject = ReadOne(subjectId);
-            oldSubject.Name = subjectName;
+            var oldSubject = ReadOne(subjects.SubjectID);
+            oldSubject.Name = subjects.Name;
+            oldSubject.Credit = oldSubject.Credit;
+            
 
             db.SaveChanges();
         }
-        public void UpdateCredit(int subjectId, int credit)
-        {
-            var oldSubject = ReadOne(subjectId);
-            oldSubject.Credit = credit;
-
-            db.SaveChanges();
-        }
+       
     }
 }

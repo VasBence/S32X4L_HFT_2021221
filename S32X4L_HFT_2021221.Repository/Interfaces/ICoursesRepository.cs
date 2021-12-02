@@ -10,7 +10,7 @@ namespace S32X4L_HFT_2021221.Repository
         void Delete(int id);
         Courses ReadOne(int id);
         IQueryable<Courses> GetAll();
-        public void UdpateCourseName(int courseID, string courseName);
+        public void UdpateCourseName(Courses courses);
 
 
     }

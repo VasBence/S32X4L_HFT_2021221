@@ -9,13 +9,18 @@ namespace S32X4L_HFT_2021221.Logic
 {
     public interface ICoursesLogic
     {
-        
-        public IQueryable<Courses> GetAllCourses();
-        public void DeleteCourse(int id);
-        public Courses ReadOneCourse(int id);
-        public void CreateCourse(Courses course);
 
-        public void UdpateCourseName(int id, string name);
+        IQueryable<Courses> GetAllCourses();
+        void DeleteCourse(int id);
+        Courses ReadOneCourse(int id);
+        void CreateCourse(Courses course);
+
+        void UdpateCourseName(Courses courses);
+
+        IEnumerable<TeacherCourses> HeldCoursesByTeachers();
+        public IEnumerable<CourseCredit> GetCreditPerCourses();
+
+       
 
     }
 
@@ -32,7 +37,7 @@ namespace S32X4L_HFT_2021221.Logic
 
         }
 
-        // CRUD METHODS
+
         public void CreateCourse(Courses course)
         {
             courseRepo.Create(course);
@@ -47,46 +52,61 @@ namespace S32X4L_HFT_2021221.Logic
 
             return courses;
         }
+
         public void DeleteCourse(int id)
         {
             courseRepo.Delete(id);
         }
 
 
-        void ICoursesLogic.UdpateCourseName(int id, string name)
+        void ICoursesLogic.UdpateCourseName(Courses courses)
         {
-            courseRepo.UdpateCourseName(id, name);
+            courseRepo.UdpateCourseName(courses);
         }
 
 
-        // NON-CRUD METH
 
 
-        public IEnumerable<string> GetCourses(string askedsubjectcourses)
+
+
+
+        public IEnumerable<CourseCredit> GetCreditPerCourses()//
         {
-            var readedRepo = courseRepo.GetAll();
-            var courses = from x in readedRepo                            
-                             where x.Subjects.Name == askedsubjectcourses
-                             select x.CourseName;
 
-            return courses;
-        } //JÓ
 
-        public IEnumerable<CourseHigherThanCredit> GetCoursesHigherThanCredit(int creditthanhigher)
-        {
-            var readedRepo = courseRepo.GetAll();
-
-            var higher = from x in readedRepo
-                         where x.Subjects.Credit >= creditthanhigher
-                         select new CourseHigherThanCredit
+            var credit = from x in courseRepo.GetAll()
+                         where x.SubjectID == x.Subjects.SubjectID
+                         select new CourseCredit
                          {
                              NAME = x.CourseName,
                              CREDIT = x.Subjects.Credit
                          };
-                      
-            return higher;
+
+
+            return credit;
 
         }
 
+        public IEnumerable<TeacherCourses> HeldCoursesByTeachers() //
+        {
+
+            var courses2 = (from x in courseRepo.GetAll()
+                            where x.TeacherID == x.Teacher.TeacherID
+                            select new TeacherCourses
+                            {
+                                NAME = x.Teacher.Name,
+                                CNAME = x.CourseName
+
+                            }).Distinct();
+
+
+
+            return courses2;
+        }
+
+
+
     }
+  
+
 }

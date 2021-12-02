@@ -22,7 +22,7 @@ namespace S32X4L_HFT_2021221.Repository
         }
         public void Delete(int id)
         {
-            db.Remove(id);
+            db.Remove(ReadOne(id));
             db.SaveChanges();
         }
         public Teacher ReadOne(int id)
@@ -34,20 +34,15 @@ namespace S32X4L_HFT_2021221.Repository
         {
             return db.teacher;
         }
-        public void UpdateAge(int id, int Age)
+       
+        
+        public void UpdateProps(Teacher teacher)
         {
-            var oldTeacher = ReadOne(id);
-            ;
-
-            oldTeacher.Age = Age;
+            var oldTeacher = ReadOne(teacher.TeacherID);
+            oldTeacher.Name = teacher.Name;
+            oldTeacher.Age = teacher.Age;
 
             db.SaveChanges();
-
-        }
-        public void UpdateName(int id, string Name)
-        {
-            var oldTeacher = ReadOne(id);
-            oldTeacher.Name = Name;
         }
     }
 }

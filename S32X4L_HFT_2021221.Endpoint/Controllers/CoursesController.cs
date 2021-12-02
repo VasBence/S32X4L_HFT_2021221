@@ -15,33 +15,33 @@ namespace S32X4L_HFT_2021221.Endpoint.Controllers
         {
             this.cl = cl;
         }
-        //GETALL
+        
         [HttpGet]
         public IEnumerable<Courses>Get()
         {
             return cl.GetAllCourses();
         }
 
-        //GETCOURSE
+      
         [HttpGet("{id}")]
         public Courses Get(int id)
         {
             return cl.ReadOneCourse(id);
         }
-        //POSTCOURSE
+       
         [HttpPost]
         public void Post([FromBody] Courses value)
         {       
             cl.CreateCourse(value);
         }
 
-        //PUTCOURSE
+       
         [HttpPut]
-        public void Put([FromBody] int id, string name)
+        public void Put([FromBody] Courses courses)
         {
-            cl.UdpateCourseName(id, name);
+            cl.UdpateCourseName(courses);
         }
-        //DELETECAR
+       
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

@@ -15,37 +15,34 @@ namespace S32X4L_HFT_2021221.Endpoint.Controllers
         {
             this.sl = sl;
         }
-        //GETALL
+    
         [HttpGet]
         public IEnumerable<Subjects> Get()
         {
             return sl.ReadAllSubjects();
         }
 
-        //GETCOURSE
+     
         [HttpGet("{id}")]
         public Subjects Get(int id)
         {
             return sl.ReadOneSubject(id);
         }
-        //POSTCOURSE
+       
         [HttpPost]
         public void Post([FromBody] Subjects value)
         {
             sl.CreateSubject(value);
         }
 
-        //PUTCOURSE
+     
         [HttpPut]
-        public void Put([FromBody] int id, string name)
+        public void Put([FromBody] Subjects subjects)
         {
-            sl.UpdateSubjectName(id, name);
+            sl.UpdateSubjectProps(subjects);
         }
-        public void Put2([FromBody] int id, int credit)
-        {
-            sl.UpdateCredit(id, credit);
-        }
-        //DELETECAR
+      
+       
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

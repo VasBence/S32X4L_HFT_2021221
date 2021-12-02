@@ -16,11 +16,21 @@ namespace S32X4L_HFT_2021221.Models
         public string Name { get; set; }
         public int Age { get; set; }
 
-        public virtual ICollection<Courses> HoldedCourses { get; set; }
+        public virtual ICollection<Courses> HeldCourses { get; set; }
 
         public Teacher()
         {
-            HoldedCourses = new HashSet<Courses>();
+            HeldCourses = new HashSet<Courses>();
         }
+    }
+    public class CourseCredit
+    {
+        public string NAME { get; set; }
+        public int CREDIT { get; set; }
+    }
+    public class TeacherCourses
+    {
+        public string NAME { get; set; }
+        public string CNAME { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\S32X4L_HFT_2021221.Data\S32X4L_HFT_2021221.Data.csproj" />
-    <ProjectReference Include="..\S32X4L_HFT_2021221.Endpoint\S32X4L_HFT_2021221.Endpoint.csproj" />
+    <PackageReference Include="ConsoleMenu-simple" Version="2.4.1" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\S32X4L_HFT_2021221.Logic\S32X4L_HFT_2021221.Logic.csproj" />
     <ProjectReference Include="..\S32X4L_HFT_2021221.Models\S32X4L_HFT_2021221.Models.csproj" />
-    <ProjectReference Include="..\S32X4L_HFT_2021221.Repository\S32X4L_HFT_2021221.Repository.csproj" />
   </ItemGroup>
 
 </Project>

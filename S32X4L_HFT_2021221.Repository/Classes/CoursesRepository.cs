@@ -23,7 +23,7 @@ namespace S32X4L_HFT_2021221.Repository
 
         public void Delete(int id)
         {
-            db.Remove(id);
+            db.Remove(ReadOne(id));
             db.SaveChanges();
         }
 
@@ -37,10 +37,10 @@ namespace S32X4L_HFT_2021221.Repository
         {
             return db.courses;
         }
-        public void UdpateCourseName(int courseID, string courseName)
+        public void UdpateCourseName(Courses courses)
         {
-            var oldCourse = ReadOne(courseID);
-            oldCourse.CourseName = courseName;
+            var oldCourse = ReadOne(courses.CourseID);
+            oldCourse.CourseName = courses.CourseName;
 
             db.SaveChanges();
         }

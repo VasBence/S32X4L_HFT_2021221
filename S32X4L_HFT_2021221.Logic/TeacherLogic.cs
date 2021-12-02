@@ -15,9 +15,9 @@ namespace S32X4L_HFT_2021221.Logic
         void DeleteTeacher(int id);
         IQueryable<Teacher> ReadAllTeacher();
         Teacher ReadOneTeacher(int id);
-        IEnumerable<TeacherCoursesCount> TeacherCoursesCount(int id);
-        void UpdateTeacherAge(int id, int age);
-        void UpdateTeacherName(int id, string name);
+       
+      
+        void UpdateTeacherProps(Teacher teacher);
     }
 
     public class TeacherLogic : ITeacherLogic
@@ -43,28 +43,12 @@ namespace S32X4L_HFT_2021221.Logic
         {
             TeacherRepository.Delete(id);
         }
-        public void UpdateTeacherAge(int id, int age)
+       
+        public void UpdateTeacherProps(Teacher teacher)
         {
-            TeacherRepository.UpdateAge(id, age);
-        }
-        public void UpdateTeacherName(int id, string name)
-        {
-            TeacherRepository.UpdateName(id, name);
-        }
-
-        public IEnumerable<TeacherCoursesCount> TeacherCoursesCount(int id) //JÓ
-        {
-
-            var courses2 = from x in TeacherRepository.GetAll().Where(X => X.TeacherID == id)
-                           where x.HoldedCourses != null
-
-                           select new TeacherCoursesCount
-                           {
-                               NAME = x.Name,
-                               COUNT = x.HoldedCourses.Count
-                           };
-            return courses2;
+            TeacherRepository.UpdateProps(teacher);
         }
 
     }
+
 }

@@ -9,7 +9,7 @@ namespace S32X4L_HFT_2021221.Repository
         void Delete(int id);
         IQueryable<Teacher> GetAll();
         Teacher ReadOne(int id);
-        void UpdateAge(int id, int Age);
-        void UpdateName(int id, string Name);
+  
+        void UpdateProps(Teacher teacher);
     }
 }

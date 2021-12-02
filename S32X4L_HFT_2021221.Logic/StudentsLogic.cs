@@ -15,15 +15,24 @@ namespace S32X4L_HFT_2021221.Logic
         void DeleteStudent(string id);
         IQueryable<Students> ReadAllStudents();
         Students ReadOneStudent(string id);
-        void UpdateStudentAge(string id, int age);
-        void UpdateStudentName(string id, string name);
+
+        void UpdateStudentProps(Students students);
+
+        public IEnumerable<string> GetMaxCreditStudent();
+
+        public IEnumerable<GetEachStudentFor> SortStudentsWithTheirCourses();
+
+        public IEnumerable<StudentsWithTheLongestNameByEachCourse> StudentsNameSortedByLengthDescByCourses();
+
+
     }
 
     public class StudentsLogic : IStudentsLogic
     {
         IStudentsRepository studentsRepository;
 
-        //CRUD METHODS
+
+  
         public StudentsLogic(IStudentsRepository repo)
         {
             studentsRepository = repo;
@@ -42,47 +51,67 @@ namespace S32X4L_HFT_2021221.Logic
         }
         public void DeleteStudent(string id)
         {
-            if (id.Length != 6)
-            {
-                throw new Exception("The Neptun code should be 6 characters long! :C ");
-            }
-            else
+
             studentsRepository.Delete(id);
         }
-        public void UpdateStudentAge(string id, int age)
+
+        public void UpdateStudentProps(Students students)
         {
-            studentsRepository.UpdateAge(id, age);
-        }
-        public void UpdateStudentName(string id, string name)
-        {
-            studentsRepository.UpdateName(id, name);
+            studentsRepository.UpdateStudentProps(students);
         }
 
 
 
-        //NONCRUD
-        public IQueryable<MaxCreditStudentFromAllCourses> GetMaxCreditStudent()
+      
+        public IEnumerable<string> GetMaxCreditStudent() 
         {
             var repoRead = studentsRepository.GetAll();
 
-            var students2 =( from x in repoRead
+            var students2 = (from x in repoRead
 
-                            orderby x.AcquiredCredtis descending
+                             orderby x.AcquiredCredtis descending
 
-
-                            select new MaxCreditStudentFromAllCourses
-                            {
-                                NAME = x.Name,
-                                CREDITS = x.AcquiredCredtis
-                            }).Take(1);
-                           
-
-
-
+                             select x.Name).ToList().Take(1);
 
             return students2;
-        } // JÓ
+        } 
 
 
+
+        public IEnumerable<GetEachStudentFor> SortStudentsWithTheirCourses() 
+        {
+
+            var oder = from x in studentsRepository.GetAll()
+                       where x.JoinedCourseID == x.JoinedCourse.TeacherID
+                       select new GetEachStudentFor
+                       {                          
+                           NAME = x.Name,
+                           TNAME = x.JoinedCourse.Teacher.Name
+                       };
+
+            return oder;
+        }
+
+
+        public IEnumerable<StudentsWithTheLongestNameByEachCourse> StudentsNameSortedByLengthDescByCourses()
+        {
+
+            var longest = (from x in studentsRepository.GetAll()
+                           where x.JoinedCourseID == x.JoinedCourse.CourseID
+                           orderby x.Name.Length descending
+                           select new StudentsWithTheLongestNameByEachCourse
+                           {
+                               CNAME = x.JoinedCourse.CourseName,
+                               SNAME = x.Name
+                           });
+
+            return longest;
+
+
+        }
     }
+
+
+
+
 }

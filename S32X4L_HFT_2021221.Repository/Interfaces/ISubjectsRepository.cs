@@ -9,7 +9,7 @@ namespace S32X4L_HFT_2021221.Repository
         void Delete(int id);
         Subjects ReadOne(int id);
         IQueryable<Subjects> GetAll();
-        void UpdateSubjectName(int subjectId, string name);
-        void UpdateCredit(int subjectId, int credit);
+        void UpdateSubjectProps(Subjects subjects);
+     
     }
 }

@@ -15,38 +15,34 @@ namespace S32X4L_HFT_2021221.Endpoint.Controllers
         {
             this.sl = sl;
         }
-        //GETALL
+       
         [HttpGet]
         public IEnumerable<Students> Get()
         {
             return sl.ReadAllStudents();
         }
 
-        //GETCOURSE
+      
         [HttpGet("{id}")]
         public Students Get(string id)
         {
             return sl.ReadOneStudent(id);
         }
-        //POSTCOURSE
+      
         [HttpPost]
         public void Post([FromBody] Students value)
         {
             sl.CreateStudent(value);
         }
 
-        //PUTCOURSE
+     
         [HttpPut]
-        public void Put([FromBody] string id, string name)
+        public void Put([FromBody] Students students)
         {
-            sl.UpdateStudentName(id, name);
+            sl.UpdateStudentProps(students);
         }
 
-        public void Put2([FromBody] string id, int age)
-        {
-            sl.UpdateStudentAge(id, age);
-        }
-        //DELETECAR
+       
         [HttpDelete("{id}")]
         public void Delete(string id)
         {
