@@ -95,24 +95,36 @@ namespace S32X4L_HFT_2021221.Test
         } //1
         [Test]
 
-        [TestCase("FERIKE2")]
 
-        public void Delete_Student_Not_Throws_Exception(string id)
+
+        public void HeldCoursesByTeachers_method_returns_with_all_necessary_values()
         {
 
-            Assert.That(() => studentsLogic.DeleteStudent(id), Throws.Nothing);
+            var readed = coursesLogic.HeldCoursesByTeachers();
+            List<TeacherCourses> heldcourses = new List<TeacherCourses>();
+            foreach (var courses in readed)
+            {
+                heldcourses.Add(courses);
+            }
+
+            Assert.That(heldcourses.Count(), Is.EqualTo(4));
 
         }        //2
 
         [Test]
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
+       
 
-        public void Test_TeacherCourses_Count_IsRight(int id)
+        public void GetCreditPerCourses_returns_right_count_of_values()
         {
+            var readed = coursesLogic.GetCreditPerCourses();
+            List<CourseCredit> coursescredit = new List<CourseCredit>();
+            foreach (var courses in readed)
+            {
+                coursescredit.Add(courses);
+            }
 
-            Assert.That(() => teacherLogic.DeleteTeacher(id), Throws.Nothing);
+            Assert.That(coursescredit.Count(), Is.EqualTo(4));
+
         }      //3
 
         [Test]
@@ -143,7 +155,7 @@ namespace S32X4L_HFT_2021221.Test
 
         [Test]
         [TestCase(1)]
-        public void Test_ReadOne_Invalid_Integer(int id) //7
+        public void Test_ReadOne_Is_Not_Return_With_null(int id) //7
         {
 
             Assert.That(subjectsLogic.ReadOneSubject(id), Is.Not.Null);
@@ -174,7 +186,7 @@ namespace S32X4L_HFT_2021221.Test
                 subjects.Add(subject);
             }
 
-            Assert.That(subjects.Count(), Is.EqualTo(0));
+            Assert.That(subjects.Count(), Is.EqualTo(2));
         }
 
         [Test]
@@ -193,20 +205,40 @@ namespace S32X4L_HFT_2021221.Test
 
             Teacher teacher = new Teacher() { TeacherID = 1, Age = 30, Name = "Kovács András" };
             Teacher teacher2 = new Teacher() { TeacherID = 2, Age = 30, Name = "Sipos Miklós" };
-            Teacher teacher3 = new Teacher() { TeacherID = 3, Age = 47, Name = "Vajda István" };
+            Teacher teacher3 = new Teacher() { TeacherID = 3, Age = 47, Name = "Vajda István",  };
 
-            Courses hftcourse1 = new Courses() { CourseID = 1, CourseName = "hftcourse1", SubjectID = hft.SubjectID, TeacherID = teacher.TeacherID };
-            Courses hftcourse2 = new Courses() { CourseID = 2, CourseName = "hftcourse2", SubjectID = hft.SubjectID, TeacherID = teacher2.TeacherID };
-            Courses anal2course1 = new Courses() { CourseID = 3, CourseName = "anal2course1", SubjectID = anal2.SubjectID, TeacherID = teacher3.TeacherID };
-            Courses anal2course2 = new Courses() { CourseID = 4, CourseName = "anal2course2", SubjectID = anal2.SubjectID, TeacherID = teacher3.TeacherID };
+            Courses hftcourse1 = new Courses() { CourseID = 1, CourseName = "hftcourse1", SubjectID = hft.SubjectID,Subjects = hft ,TeacherID = teacher.TeacherID, Teacher = teacher };
+            Courses hftcourse2 = new Courses() { CourseID = 2, CourseName = "hftcourse2", SubjectID = hft.SubjectID, Subjects = hft, TeacherID = teacher2.TeacherID, Teacher = teacher2 };
+            Courses anal2course1 = new Courses() { CourseID = 3, CourseName = "anal2course1", SubjectID = anal2.SubjectID, Subjects = anal2, TeacherID = teacher3.TeacherID, Teacher = teacher3 };
+            Courses anal2course2 = new Courses() { CourseID = 4, CourseName = "anal2course2", SubjectID = anal2.SubjectID, Subjects = anal2, TeacherID = teacher3.TeacherID,Teacher = teacher3};
 
-            Students bence = new Students() { NeptunCode = "S32X4L", Name = "BENCE", Age = 19, JoinedCourseID = anal2course1.CourseID, AcquiredCredtis = 30 };
-            Students benceee = new Students() { NeptunCode = "S321AS", Name = "BENCEEE", Age = 31, JoinedCourseID = hftcourse1.CourseID, AcquiredCredtis = 30 };
-            Students ferike = new Students() { NeptunCode = "12SD23", Name = "FERENC", Age = 21, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 20 };
-            Students bogi = new Students() { NeptunCode = "SDA123", Name = "Bogi", Age = 19, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 210 };
-            Students lilla = new Students() { NeptunCode = "ASD123", Name = "Lilla", Age = 23, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 200 };
-            Students jozsef = new Students() { NeptunCode = "ASD112", Name = "József", Age = 24, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 140 };
+            teacher.HeldCourses.Add(hftcourse1);
+            teacher2.HeldCourses.Add(hftcourse2);
+            teacher3.HeldCourses.Add(anal2course2);
+            teacher3.HeldCourses.Add(anal2course1);
+           
+            anal2.SubjectCourses.Add(anal2course1);
+            anal2.SubjectCourses.Add(anal2course2);           
+            hft.SubjectCourses.Add(hftcourse1);
+            hft.SubjectCourses.Add(hftcourse2);
 
+
+            Students bence = new Students() { NeptunCode = "S32X4L", Name = "BENCE", Age = 19, JoinedCourseID = anal2course1.CourseID, JoinedCourse = anal2course1, AcquiredCredtis = 30 };
+            Students benceee = new Students() { NeptunCode = "S321AS", Name = "BENCEEE", Age = 31, JoinedCourseID = hftcourse1.CourseID, JoinedCourse = hftcourse1, AcquiredCredtis = 30 };
+            Students ferike = new Students() { NeptunCode = "12SD23", Name = "FERENC", Age = 21, JoinedCourseID = hftcourse2.CourseID,JoinedCourse = hftcourse2 ,AcquiredCredtis = 20 };
+            Students bogi = new Students() { NeptunCode = "SDA123", Name = "Bogi", Age = 19, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2,AcquiredCredtis = 210 };
+            Students lilla = new Students() { NeptunCode = "ASD123", Name = "Lilla", Age = 23, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 200 };
+            Students jozsef = new Students() { NeptunCode = "ASD112", Name = "József", Age = 24, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 140 };
+
+            hftcourse1.Students.Add(benceee);
+            hftcourse2.Students.Add(bogi);
+            hftcourse2.Students.Add(lilla);
+            hftcourse2.Students.Add(jozsef);
+            hftcourse2.Students.Add(ferike);
+            anal2course1.Students.Add(bence);
+
+            
+           
 
 
             List<Courses> courses = new List<Courses>();
@@ -224,22 +256,37 @@ namespace S32X4L_HFT_2021221.Test
 
             Teacher teacher = new Teacher() { TeacherID = 1, Age = 30, Name = "Kovács András" };
             Teacher teacher2 = new Teacher() { TeacherID = 2, Age = 30, Name = "Sipos Miklós" };
-            Teacher teacher3 = new Teacher() { TeacherID = 3, Age = 47, Name = "Vajda István" };
+            Teacher teacher3 = new Teacher() { TeacherID = 3, Age = 47, Name = "Vajda István", };
 
-            Courses hftcourse1 = new Courses() { CourseID = 1, CourseName = "hftcourse1", SubjectID = hft.SubjectID, TeacherID = teacher.TeacherID };
-            Courses hftcourse2 = new Courses() { CourseID = 2, CourseName = "hftcourse2", SubjectID = hft.SubjectID, TeacherID = teacher2.TeacherID };
-            Courses anal2course1 = new Courses() { CourseID = 3, CourseName = "anal2course1", SubjectID = anal2.SubjectID, TeacherID = teacher3.TeacherID };
-            Courses anal2course2 = new Courses() { CourseID = 4, CourseName = "anal2course2", SubjectID = anal2.SubjectID, TeacherID = teacher3.TeacherID };
+            Courses hftcourse1 = new Courses() { CourseID = 1, CourseName = "hftcourse1", SubjectID = hft.SubjectID, Subjects = hft, TeacherID = teacher.TeacherID, Teacher = teacher };
+            Courses hftcourse2 = new Courses() { CourseID = 2, CourseName = "hftcourse2", SubjectID = hft.SubjectID, Subjects = hft, TeacherID = teacher2.TeacherID, Teacher = teacher2 };
+            Courses anal2course1 = new Courses() { CourseID = 3, CourseName = "anal2course1", SubjectID = anal2.SubjectID, Subjects = anal2, TeacherID = teacher3.TeacherID, Teacher = teacher3 };
+            Courses anal2course2 = new Courses() { CourseID = 4, CourseName = "anal2course2", SubjectID = anal2.SubjectID, Subjects = anal2, TeacherID = teacher3.TeacherID, Teacher = teacher3 };
+
+            teacher.HeldCourses.Add(hftcourse1);
+            teacher2.HeldCourses.Add(hftcourse2);
+            teacher3.HeldCourses.Add(anal2course2);
+            teacher3.HeldCourses.Add(anal2course1);
+
+            anal2.SubjectCourses.Add(anal2course1);
+            anal2.SubjectCourses.Add(anal2course2);
+            hft.SubjectCourses.Add(hftcourse1);
+            hft.SubjectCourses.Add(hftcourse2);
 
 
+            Students bence = new Students() { NeptunCode = "S32X4L", Name = "BENCE", Age = 19, JoinedCourseID = anal2course1.CourseID, JoinedCourse = anal2course1, AcquiredCredtis = 30 };
+            Students benceee = new Students() { NeptunCode = "S321AS", Name = "BENCEEE", Age = 31, JoinedCourseID = hftcourse1.CourseID, JoinedCourse = hftcourse1, AcquiredCredtis = 30 };
+            Students ferike = new Students() { NeptunCode = "12SD23", Name = "FERENC", Age = 21, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 20 };
+            Students bogi = new Students() { NeptunCode = "SDA123", Name = "Bogi", Age = 19, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 210 };
+            Students lilla = new Students() { NeptunCode = "ASD123", Name = "Lilla", Age = 23, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 200 };
+            Students jozsef = new Students() { NeptunCode = "ASD112", Name = "József", Age = 24, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 140 };
 
-
-            Students bence = new Students() { NeptunCode = "S32X4L", Name = "BENCE", Age = 19, JoinedCourseID = anal2course1.CourseID, AcquiredCredtis = 30 };
-            Students benceee = new Students() { NeptunCode = "S321AS", Name = "BENCEEE", Age = 31, JoinedCourseID = hftcourse1.CourseID, AcquiredCredtis = 30 };
-            Students ferike = new Students() { NeptunCode = "12SD23", Name = "FERENC", Age = 21, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 20 };
-            Students bogi = new Students() { NeptunCode = "SDA123", Name = "Bogi", Age = 19, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 210 };
-            Students lilla = new Students() { NeptunCode = "ASD123", Name = "Lilla", Age = 23, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 200 };
-            Students jozsef = new Students() { NeptunCode = "ASD112", Name = "József", Age = 24, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 140 };
+            hftcourse1.Students.Add(benceee);
+            hftcourse2.Students.Add(bogi);
+            hftcourse2.Students.Add(lilla);
+            hftcourse2.Students.Add(jozsef);
+            hftcourse2.Students.Add(ferike);
+            anal2course1.Students.Add(bence);
 
 
             List<Teacher> teachers = new List<Teacher>();
@@ -255,22 +302,38 @@ namespace S32X4L_HFT_2021221.Test
 
             Teacher teacher = new Teacher() { TeacherID = 1, Age = 30, Name = "Kovács András" };
             Teacher teacher2 = new Teacher() { TeacherID = 2, Age = 30, Name = "Sipos Miklós" };
-            Teacher teacher3 = new Teacher() { TeacherID = 3, Age = 47, Name = "Vajda István" };
+            Teacher teacher3 = new Teacher() { TeacherID = 3, Age = 47, Name = "Vajda István", };
 
-            Courses hftcourse1 = new Courses() { CourseID = 1, CourseName = "hftcourse1", SubjectID = hft.SubjectID, TeacherID = teacher.TeacherID };
-            Courses hftcourse2 = new Courses() { CourseID = 2, CourseName = "hftcourse2", SubjectID = hft.SubjectID, TeacherID = teacher2.TeacherID };
-            Courses anal2course1 = new Courses() { CourseID = 3, CourseName = "anal2course1", SubjectID = anal2.SubjectID, TeacherID = teacher3.TeacherID };
-            Courses anal2course2 = new Courses() { CourseID = 4, CourseName = "anal2course2", SubjectID = anal2.SubjectID, TeacherID = teacher3.TeacherID };
+            Courses hftcourse1 = new Courses() { CourseID = 1, CourseName = "hftcourse1", SubjectID = hft.SubjectID, Subjects = hft, TeacherID = teacher.TeacherID, Teacher = teacher };
+            Courses hftcourse2 = new Courses() { CourseID = 2, CourseName = "hftcourse2", SubjectID = hft.SubjectID, Subjects = hft, TeacherID = teacher2.TeacherID, Teacher = teacher2 };
+            Courses anal2course1 = new Courses() { CourseID = 3, CourseName = "anal2course1", SubjectID = anal2.SubjectID, Subjects = anal2, TeacherID = teacher3.TeacherID, Teacher = teacher3 };
+            Courses anal2course2 = new Courses() { CourseID = 4, CourseName = "anal2course2", SubjectID = anal2.SubjectID, Subjects = anal2, TeacherID = teacher3.TeacherID, Teacher = teacher3 };
+
+            teacher.HeldCourses.Add(hftcourse1);
+            teacher2.HeldCourses.Add(hftcourse2);
+            teacher3.HeldCourses.Add(anal2course2);
+            teacher3.HeldCourses.Add(anal2course1);
+
+            anal2.SubjectCourses.Add(anal2course1);
+            anal2.SubjectCourses.Add(anal2course2);
+            hft.SubjectCourses.Add(hftcourse1);
+            hft.SubjectCourses.Add(hftcourse2);
 
 
+            Students bence = new Students() { NeptunCode = "S32X4L", Name = "BENCE", Age = 19, JoinedCourseID = anal2course1.CourseID, JoinedCourse = anal2course1, AcquiredCredtis = 30 };
+            Students benceee = new Students() { NeptunCode = "S321AS", Name = "BENCEEE", Age = 31, JoinedCourseID = hftcourse1.CourseID, JoinedCourse = hftcourse1, AcquiredCredtis = 30 };
+            Students ferike = new Students() { NeptunCode = "12SD23", Name = "FERENC", Age = 21, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 20 };
+            Students bogi = new Students() { NeptunCode = "SDA123", Name = "Bogi", Age = 19, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 210 };
+            Students lilla = new Students() { NeptunCode = "ASD123", Name = "Lilla", Age = 23, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 200 };
+            Students jozsef = new Students() { NeptunCode = "ASD112", Name = "József", Age = 24, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 140 };
 
+            hftcourse1.Students.Add(benceee);
+            hftcourse2.Students.Add(bogi);
+            hftcourse2.Students.Add(lilla);
+            hftcourse2.Students.Add(jozsef);
+            hftcourse2.Students.Add(ferike);
+            anal2course1.Students.Add(bence);
 
-            Students bence = new Students() { NeptunCode = "S32X4L", Name = "BENCE", Age = 19, JoinedCourseID = anal2course1.CourseID, AcquiredCredtis = 30 };
-            Students benceee = new Students() { NeptunCode = "S321AS", Name = "BENCEEE", Age = 31, JoinedCourseID = hftcourse1.CourseID, AcquiredCredtis = 30 };
-            Students ferike = new Students() { NeptunCode = "12SD23", Name = "FERENC", Age = 21, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 20 };
-            Students bogi = new Students() { NeptunCode = "SDA123", Name = "Bogi", Age = 19, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 210 };
-            Students lilla = new Students() { NeptunCode = "ASD123", Name = "Lilla", Age = 23, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 200 };
-            Students jozsef = new Students() { NeptunCode = "ASD112", Name = "József", Age = 24, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 140 };
 
 
 
@@ -288,22 +351,38 @@ namespace S32X4L_HFT_2021221.Test
 
             Teacher teacher = new Teacher() { TeacherID = 1, Age = 30, Name = "Kovács András" };
             Teacher teacher2 = new Teacher() { TeacherID = 2, Age = 30, Name = "Sipos Miklós" };
-            Teacher teacher3 = new Teacher() { TeacherID = 3, Age = 47, Name = "Vajda István" };
+            Teacher teacher3 = new Teacher() { TeacherID = 3, Age = 47, Name = "Vajda István", };
 
-            Courses hftcourse1 = new Courses() { CourseID = 1, CourseName = "hftcourse1", SubjectID = hft.SubjectID, TeacherID = teacher.TeacherID };
-            Courses hftcourse2 = new Courses() { CourseID = 2, CourseName = "hftcourse2", SubjectID = hft.SubjectID, TeacherID = teacher2.TeacherID };
-            Courses anal2course1 = new Courses() { CourseID = 3, CourseName = "anal2course1", SubjectID = anal2.SubjectID, TeacherID = teacher3.TeacherID };
-            Courses anal2course2 = new Courses() { CourseID = 4, CourseName = "anal2course2", SubjectID = anal2.SubjectID, TeacherID = teacher3.TeacherID };
+            Courses hftcourse1 = new Courses() { CourseID = 1, CourseName = "hftcourse1", SubjectID = hft.SubjectID, Subjects = hft, TeacherID = teacher.TeacherID, Teacher = teacher };
+            Courses hftcourse2 = new Courses() { CourseID = 2, CourseName = "hftcourse2", SubjectID = hft.SubjectID, Subjects = hft, TeacherID = teacher2.TeacherID, Teacher = teacher2 };
+            Courses anal2course1 = new Courses() { CourseID = 3, CourseName = "anal2course1", SubjectID = anal2.SubjectID, Subjects = anal2, TeacherID = teacher3.TeacherID, Teacher = teacher3 };
+            Courses anal2course2 = new Courses() { CourseID = 4, CourseName = "anal2course2", SubjectID = anal2.SubjectID, Subjects = anal2, TeacherID = teacher3.TeacherID, Teacher = teacher3 };
+
+            teacher.HeldCourses.Add(hftcourse1);
+            teacher2.HeldCourses.Add(hftcourse2);
+            teacher3.HeldCourses.Add(anal2course2);
+            teacher3.HeldCourses.Add(anal2course1);
+
+            anal2.SubjectCourses.Add(anal2course1);
+            anal2.SubjectCourses.Add(anal2course2);
+            hft.SubjectCourses.Add(hftcourse1);
+            hft.SubjectCourses.Add(hftcourse2);
 
 
+            Students bence = new Students() { NeptunCode = "S32X4L", Name = "BENCE", Age = 19, JoinedCourseID = anal2course1.CourseID, JoinedCourse = anal2course1, AcquiredCredtis = 30 };
+            Students benceee = new Students() { NeptunCode = "S321AS", Name = "BENCEEE", Age = 31, JoinedCourseID = hftcourse1.CourseID, JoinedCourse = hftcourse1, AcquiredCredtis = 30 };
+            Students ferike = new Students() { NeptunCode = "12SD23", Name = "FERENC", Age = 21, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 20 };
+            Students bogi = new Students() { NeptunCode = "SDA123", Name = "Bogi", Age = 19, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 210 };
+            Students lilla = new Students() { NeptunCode = "ASD123", Name = "Lilla", Age = 23, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 200 };
+            Students jozsef = new Students() { NeptunCode = "ASD112", Name = "József", Age = 24, JoinedCourseID = hftcourse2.CourseID, JoinedCourse = hftcourse2, AcquiredCredtis = 140 };
 
+            hftcourse1.Students.Add(benceee);
+            hftcourse2.Students.Add(bogi);
+            hftcourse2.Students.Add(lilla);
+            hftcourse2.Students.Add(jozsef);
+            hftcourse2.Students.Add(ferike);
+            anal2course1.Students.Add(bence);
 
-            Students bence = new Students() { NeptunCode = "S32X4L", Name = "BENCE", Age = 19, JoinedCourseID = anal2course1.CourseID, AcquiredCredtis = 30 };
-            Students benceee = new Students() { NeptunCode = "S321AS", Name = "BENCEEE", Age = 31, JoinedCourseID = hftcourse1.CourseID, AcquiredCredtis = 30 };
-            Students ferike = new Students() { NeptunCode = "12SD23", Name = "FERENC", Age = 21, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 20 };
-            Students bogi = new Students() { NeptunCode = "SDA123", Name = "Bogi", Age = 19, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 210 };
-            Students lilla = new Students() { NeptunCode = "ASD123", Name = "Lilla", Age = 23, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 200 };
-            Students jozsef = new Students() { NeptunCode = "ASD112", Name = "József", Age = 24, JoinedCourseID = hftcourse2.CourseID, AcquiredCredtis = 140 };
 
 
             List<Students> students = new List<Students>();
