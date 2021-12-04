@@ -61,5 +61,9 @@ namespace S32X4L_HFT_2021221.Endpoint.Controllers
         {
             return coursesLogic.HeldCoursesByTeachers();
         }
+        public IEnumerable<StudentsOnCoursesCount> StudentsOnCoursesCount()
+        {
+            return studentsLogic.StudentsOnCoursesCount();
+        }
     }
 }
