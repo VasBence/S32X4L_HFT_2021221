@@ -104,6 +104,15 @@ namespace S32X4L_HFT_2021221.Client
             Console.ReadKey();
         }
 
+        static void StudentsOnCoursesCount()
+        {
+            var courses = rest.Get<StudentsOnCoursesCount>("stat/StudentsOnCoursesCount");
+            courses.ForEach(x => Console.WriteLine(x.NAME + " --- " + x.COUNT));
+            Console.ReadKey();
+            ;
+
+        }
+
 
         #endregion
         #region SUBJECTSREGION
@@ -422,10 +431,11 @@ namespace S32X4L_HFT_2021221.Client
             .Add("Egy kurzus beolvasása.", () => ReadOneCourse())
             .Add("Kurzus törlés.e", () => DeleteCourse())
             .Add("Kurzus hozzáadása.", () => AddCourse())
-            .Add("Kurzus nevének változtatása.", () => ChangeCourseName())           
+            .Add("Kurzus nevének változtatása.", () => ChangeCourseName())
             .Add("Kiírja a kurzusok kreditértékét.", () => GetCreditPerCourses())//
-            .Add("Melyik kurzust melyik tanár tartja?", () => HeldCoursesByTeachers()); //
-
+            .Add("Melyik kurzust melyik tanár tartja?", () => HeldCoursesByTeachers()) //
+            .Add("Kurzusonkent hany diák csatlakozott?", ()=>StudentsOnCoursesCount());
+            
 
             ConsoleMenu subjectsMenu = new ConsoleMenu(args, 1)
            .Add("Összes tárgy lekérdezése.", () => GetSubjects())
@@ -460,8 +470,9 @@ namespace S32X4L_HFT_2021221.Client
            .Add("Tanulók metódusai:", studentMenu.Show)
            .Add("Tanárok metódusai:", teacherMenu.Show);
 
-
+            
             mainMenu.Show();
+          
         }
       
 
