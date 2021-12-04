@@ -50,4 +50,10 @@ namespace S32X4L_HFT_2021221.Models
 
         public int COUNT { get; set; }
     }
+
+    public class StudentsOnCoursesCount
+    {
+        public string NAME { get; set; }
+        public int COUNT { get; set; }
+    }
 }
