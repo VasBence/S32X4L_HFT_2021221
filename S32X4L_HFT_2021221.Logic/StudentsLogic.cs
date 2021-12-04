@@ -24,6 +24,7 @@ namespace S32X4L_HFT_2021221.Logic
 
         public IEnumerable<StudentsWithTheLongestNameByEachCourse> StudentsNameSortedByLengthDescByCourses();
 
+        public IEnumerable<StudentsOnCoursesCount> StudentsOnCoursesCount();
 
     }
 
@@ -108,6 +109,19 @@ namespace S32X4L_HFT_2021221.Logic
             return longest;
 
 
+        }
+
+        public IEnumerable<StudentsOnCoursesCount> StudentsOnCoursesCount()
+        {
+            var joined = from x in studentsRepository.GetAll()
+                         group x by x.JoinedCourse.CourseName into g
+                         select new StudentsOnCoursesCount
+                         {
+                             NAME = g.Key,
+                             COUNT = g.Count()
+                         };
+
+            return joined;
         }
     }
 
