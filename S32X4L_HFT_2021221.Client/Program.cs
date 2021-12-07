@@ -429,7 +429,7 @@ namespace S32X4L_HFT_2021221.Client
             ConsoleMenu coursesMenu = new ConsoleMenu(args, 1)
             .Add("Összes kurzus lekérdezése.", () => GetCourses())
             .Add("Egy kurzus beolvasása.", () => ReadOneCourse())
-            .Add("Kurzus törlés.e", () => DeleteCourse())
+            .Add("Kurzus törlése", () => DeleteCourse())
             .Add("Kurzus hozzáadása.", () => AddCourse())
             .Add("Kurzus nevének változtatása.", () => ChangeCourseName())
             .Add("Kiírja a kurzusok kreditértékét.", () => GetCreditPerCourses())
