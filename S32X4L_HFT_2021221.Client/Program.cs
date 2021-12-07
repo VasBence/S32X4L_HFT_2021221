@@ -90,7 +90,7 @@ namespace S32X4L_HFT_2021221.Client
             Console.WriteLine("Át lett nevezve " + get.CourseName + "-re");
             Console.ReadKey();
         }
-        static void GetCreditPerCourses()//
+        static void GetCreditPerCourses()
         {
             var courses = rest.Get<CourseCredit>("stat/GetCreditPerCourses");
             courses.ForEach(x => Console.WriteLine(x.NAME + " --- " + x.CREDIT));
@@ -109,7 +109,7 @@ namespace S32X4L_HFT_2021221.Client
             var courses = rest.Get<StudentsOnCoursesCount>("stat/StudentsOnCoursesCount");
             courses.ForEach(x => Console.WriteLine(x.NAME + " --- " + x.COUNT));
             Console.ReadKey();
-            ;
+            
 
         }
 
@@ -432,8 +432,8 @@ namespace S32X4L_HFT_2021221.Client
             .Add("Kurzus törlés.e", () => DeleteCourse())
             .Add("Kurzus hozzáadása.", () => AddCourse())
             .Add("Kurzus nevének változtatása.", () => ChangeCourseName())
-            .Add("Kiírja a kurzusok kreditértékét.", () => GetCreditPerCourses())//
-            .Add("Melyik kurzust melyik tanár tartja?", () => HeldCoursesByTeachers()) //
+            .Add("Kiírja a kurzusok kreditértékét.", () => GetCreditPerCourses())
+            .Add("Melyik kurzust melyik tanár tartja?", () => HeldCoursesByTeachers()) 
             .Add("Kurzusonkent hany diák csatlakozott?", ()=>StudentsOnCoursesCount());
             
 
@@ -457,9 +457,9 @@ namespace S32X4L_HFT_2021221.Client
            .Add("Tanuló törlése.", () => DeleteStudent())
            .Add("Tanuló hozzáadása.", () => AddStudent())
            .Add("Tanuló nevének változtatása.", () => ChangeStudentProps())
-           .Add("A legtöbb kredittel rendelkező tanuló.", () => StudentWithMostCredit()) //
-           .Add("Tanulók tanárai.", () => GetEachStudentForEachCoursesbyTeachers()) //
-           .Add("Rendezett tanulók.", () => StudentsNameSortedByLengthDescByCourses());//
+           .Add("A legtöbb kredittel rendelkező tanuló.", () => StudentWithMostCredit()) 
+           .Add("Tanulók tanárai.", () => GetEachStudentForEachCoursesbyTeachers()) 
+           .Add("Rendezett tanulók.", () => StudentsNameSortedByLengthDescByCourses());
 
 
 
