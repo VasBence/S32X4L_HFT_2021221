@@ -56,8 +56,7 @@ namespace S32X4L_HFT_2021221.Test
                   NeptunCode = "IMGAY2",
                   Name = "FERENC2",
                   Age = 22,
-                  JoinedCourseID = 2,
-              
+                  JoinedCourseID = 2,             
                   AcquiredCredtis = 210
 
               });
@@ -97,7 +96,7 @@ namespace S32X4L_HFT_2021221.Test
 
 
 
-        public void HeldCoursesByTeachers_method_returns_with_all_necessary_values()
+        public void Held_Courses_By_Teachers_method_returns_with_all_necessary_values()
         {
 
             var readed = coursesLogic.HeldCoursesByTeachers();
@@ -114,7 +113,7 @@ namespace S32X4L_HFT_2021221.Test
         [Test]
        
 
-        public void GetCreditPerCourses_returns_right_count_of_values()
+        public void Get_Credit_Per_Courses_returns_right_amount_of_values()
         {
             var readed = coursesLogic.GetCreditPerCourses();
             List<CourseCredit> coursescredit = new List<CourseCredit>();
@@ -129,7 +128,7 @@ namespace S32X4L_HFT_2021221.Test
 
         [Test]
 
-        public void GetAll_Method_Is_Reading_All_Objects()
+        public void GetAll_Method_Is_Reading_Every_Objects()
         {
           
             Assert.That(studentsLogic.ReadAllStudents().Count() == 6);
@@ -138,7 +137,7 @@ namespace S32X4L_HFT_2021221.Test
 
         [Test]
         [TestCase(1)]
-        public void GetMaxCredit_returnValueCount_IsOne(int count)
+        public void GetMaxCredit_Return_Value_Count_Is_One(int count)
         {
 
             Assert.That(studentsLogic.GetMaxCreditStudent().ToList().Count, Is.EqualTo(count));
@@ -169,7 +168,7 @@ namespace S32X4L_HFT_2021221.Test
 
         }
         [Test]
-        public void Read_One_Subject_IsNotWorking_With_False_Data() 
+        public void Read_One_Subject_Is_Not_Working_With_False_Data() 
         {
             Assert.That(subjectsLogic.ReadOneSubject(1).SubjectID, Is.Not.EqualTo(2));
             Assert.That(subjectsLogic.ReadOneSubject(1).Credit, Is.Not.EqualTo(7));
@@ -177,7 +176,7 @@ namespace S32X4L_HFT_2021221.Test
         }
 
         [Test]
-        public void Teacher_Courses_Count()
+        public void Teacher_Courses_Count_method_test()
         {
             var readed = subjectsLogic.GetCoursesFromSubjects();
             List<CoursesCountFromSubjects> subjects = new List<CoursesCountFromSubjects>();
