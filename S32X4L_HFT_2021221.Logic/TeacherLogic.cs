@@ -14,12 +14,9 @@ namespace S32X4L_HFT_2021221.Logic
         void CreateTeacher(Teacher teacher);
         void DeleteTeacher(int id);
         IQueryable<Teacher> ReadAllTeacher();
-        Teacher ReadOneTeacher(int id);
-       
-      
+        Teacher ReadOneTeacher(int id);         
         void UpdateTeacherProps(Teacher teacher);
     }
-
     public class TeacherLogic : ITeacherLogic
     {
         ITeacherRepository TeacherRepository;
@@ -42,8 +39,7 @@ namespace S32X4L_HFT_2021221.Logic
         public void DeleteTeacher(int id)
         {
             TeacherRepository.Delete(id);
-        }
-       
+        }      
         public void UpdateTeacherProps(Teacher teacher)
         {
             TeacherRepository.UpdateProps(teacher);

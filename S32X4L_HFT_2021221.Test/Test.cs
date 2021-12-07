@@ -92,10 +92,8 @@ namespace S32X4L_HFT_2021221.Test
 
             Assert.That(firstteacher.Name, Is.EqualTo(name));
         } 
+
         [Test]
-
-
-
         public void Held_Courses_By_Teachers_method_returns_with_all_necessary_values()
         {
 
@@ -110,9 +108,7 @@ namespace S32X4L_HFT_2021221.Test
 
         }        
 
-        [Test]
-       
-
+        [Test]      
         public void Get_Credit_Per_Courses_returns_right_amount_of_values()
         {
             var readed = coursesLogic.GetCreditPerCourses();
@@ -127,7 +123,6 @@ namespace S32X4L_HFT_2021221.Test
         }      
 
         [Test]
-
         public void GetAll_Method_Is_Reading_Every_Objects()
         {
           
@@ -148,7 +143,6 @@ namespace S32X4L_HFT_2021221.Test
 
         public void Delete_Subject_not_throws_exception(int id)  
         {
-
             Assert.That(() => subjectsLogic.DeleteSubject(id), Throws.Nothing);
         }
 
@@ -167,6 +161,7 @@ namespace S32X4L_HFT_2021221.Test
             Assert.That(subjectsLogic.ReadOneSubject(1).Credit, Is.EqualTo(6));
 
         }
+
         [Test]
         public void Read_One_Subject_Is_Not_Working_With_False_Data() 
         {

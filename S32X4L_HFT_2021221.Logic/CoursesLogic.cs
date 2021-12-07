@@ -36,8 +36,6 @@ namespace S32X4L_HFT_2021221.Logic
         {
 
         }
-
-
         public void CreateCourse(Courses course)
         {
             courseRepo.Create(course);
@@ -52,25 +50,15 @@ namespace S32X4L_HFT_2021221.Logic
 
             return courses;
         }
-
         public void DeleteCourse(int id)
         {
             courseRepo.Delete(id);
         }
-
-
         void ICoursesLogic.UdpateCourseName(Courses courses)
         {
             courseRepo.UdpateCourseName(courses);
         }
-
-
-
-
-
-
-
-        public IEnumerable<CourseCredit> GetCreditPerCourses()//
+        public IEnumerable<CourseCredit> GetCreditPerCourses()
         {
 
 
@@ -86,8 +74,7 @@ namespace S32X4L_HFT_2021221.Logic
             return credit;
 
         }
-
-        public IEnumerable<TeacherCourses> HeldCoursesByTeachers() //
+        public IEnumerable<TeacherCourses> HeldCoursesByTeachers() 
         {
 
             var courses2 = (from x in courseRepo.GetAll()
@@ -103,9 +90,6 @@ namespace S32X4L_HFT_2021221.Logic
 
             return courses2;
         }
-
-
-
     }
   
 

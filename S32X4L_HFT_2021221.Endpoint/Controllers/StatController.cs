@@ -29,7 +29,6 @@ namespace S32X4L_HFT_2021221.Endpoint.Controllers
         {
             return coursesLogic.HeldCoursesByTeachers();
         }
-
         [HttpGet]
         public IEnumerable<CoursesCountFromSubjects> GetCoursesFromSubjects()
         {
@@ -55,7 +54,6 @@ namespace S32X4L_HFT_2021221.Endpoint.Controllers
         {
             return studentsLogic.StudentsNameSortedByLengthDescByCourses();
         }
-
         [HttpGet]
         public IEnumerable<TeacherCourses>HeldCoursesByTeachers()
         {
