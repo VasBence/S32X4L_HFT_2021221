@@ -209,7 +209,7 @@ namespace S32X4L_HFT_2021221.Client
         {
             Console.WriteLine("Az összes tárgy:");
             var getsutents = rest.Get<Students>("students");
-            getsutents.ForEach(x => Console.WriteLine("Tanuló neve " + x.Name + "---" + "elért kredit: " + x.AcquiredCredtis + "---" + "kor: " + x.Age));
+            getsutents.ForEach(x => Console.WriteLine("Tanuló neve " + x.Name + " --- " + "elért kredit: " + x.AcquiredCredtis + " --- " + "kor: " + x.Age));
             Console.ReadKey();
 
         }
@@ -217,7 +217,7 @@ namespace S32X4L_HFT_2021221.Client
         {
 
             var getStudents = rest.Get<Students>("students");
-            getStudents.ForEach(x => Console.WriteLine("Tanuló neve: " + x.Name + "---" + "NEPTUN kód:" + x.NeptunCode));
+            getStudents.ForEach(x => Console.WriteLine("Tanuló neve: " + x.Name + " --- " + "NEPTUN kód:" + x.NeptunCode));
 
             Console.WriteLine("Írja be az egyik tanuló neptunkódját");
             string id = Console.ReadLine();
@@ -232,7 +232,7 @@ namespace S32X4L_HFT_2021221.Client
         {
 
             var getStudent = rest.Get<Students>("students");
-            getStudent.ForEach(x => Console.WriteLine("Diák neve: " + x.Name + "---" + "NEPTUNKÓD:" + x.NeptunCode));
+            getStudent.ForEach(x => Console.WriteLine("Diák neve: " + x.Name + " --- " + "NEPTUNKÓD:" + x.NeptunCode));
 
             Console.WriteLine("Írja be annak a tanulónak a neptunkódját amelyiket törölni szeretné");
             string studentId = Console.ReadLine();
@@ -250,7 +250,7 @@ namespace S32X4L_HFT_2021221.Client
 
             Console.WriteLine("A diákok");
             var getstudents = rest.Get<Students>("students");
-            getstudents.ForEach(x => Console.WriteLine("Tanár neve: " + x.Name + "---" + "NEPTUN kód :" + x.NeptunCode + "---" + "Kora :" + x.Age));
+            getstudents.ForEach(x => Console.WriteLine("Tanár neve: " + x.Name + " --- " + "NEPTUN kód :" + x.NeptunCode + " --- " + "Kora :" + x.Age));
             Students newStudents = new Students();
 
             Console.WriteLine("Adja meg a diák neptunkódját");
@@ -268,7 +268,7 @@ namespace S32X4L_HFT_2021221.Client
             newStudents.Age = int.Parse(Console.ReadLine());
 
             var getCourses = rest.Get<Courses>("courses");
-            getCourses.ForEach(x => Console.WriteLine("Kurzus neve: " + x.CourseName + "---" + "Kurzus ID:" + x.CourseID));
+            getCourses.ForEach(x => Console.WriteLine("Kurzus neve: " + x.CourseName + " --- " + "Kurzus ID:" + x.CourseID));
             Console.WriteLine("Adjam meg melyik kurzushoz csatlakozott a diák");
 
             newStudents.JoinedCourseID = int.Parse(Console.ReadLine());
@@ -282,7 +282,7 @@ namespace S32X4L_HFT_2021221.Client
         static void ChangeStudentProps()
         {
             var getStudents = rest.Get<Students>("students");
-            getStudents.ForEach(x => Console.WriteLine("Tanuló neve: " + x.Name + "---" + "Kurzus ID:" + x.NeptunCode));
+            getStudents.ForEach(x => Console.WriteLine("Tanuló neve: " + x.Name + " --- " + "Kurzus ID:" + x.NeptunCode));
 
 
             Console.WriteLine("Írja be annak a tanulónak a neptunkódját akinek a nevét át szeretné írni");
@@ -356,7 +356,7 @@ namespace S32X4L_HFT_2021221.Client
         {
 
             var getsubject = rest.Get<Teacher>("teacher");
-            getsubject.ForEach(x => Console.WriteLine("Tanár neve: " + x.Name + " --- " + "Kora: " + x.Age + "---" + "ID :" + x.TeacherID));
+            getsubject.ForEach(x => Console.WriteLine("Tanár neve: " + x.Name + " --- " + "Kora: " + x.Age + " --- " + "ID :" + x.TeacherID));
             Console.WriteLine("Írja be annak a tanárnak az ID-jét amelyiket törölni szeretni");
             int teacherId = int.Parse(Console.ReadLine());
             Console.WriteLine();
@@ -377,7 +377,7 @@ namespace S32X4L_HFT_2021221.Client
         static void ChangeTeacherProps()
         {
             var getTeacher = rest.Get<Teacher>("teacher");
-            getTeacher.ForEach(x => Console.WriteLine("Tanár neve: " + x.Name + "---" + "Tanár ID: " + x.TeacherID));
+            getTeacher.ForEach(x => Console.WriteLine("Tanár neve: " + x.Name + " --- " + "Tanár ID: " + x.TeacherID));
 
 
             Console.WriteLine("Írja be annak a tanulónak a neptunkódját akinek a nevét át szeretné írni");
@@ -403,7 +403,7 @@ namespace S32X4L_HFT_2021221.Client
 
             Console.WriteLine("A  tanárok");
             var getTeacher = rest.Get<Teacher>("teacher");
-            getTeacher.ForEach(x => Console.WriteLine("Tanár neve: " + x.Name + "---" + "Kora :" + x.Age + "---" + "ID :" + x.TeacherID));
+            getTeacher.ForEach(x => Console.WriteLine("Tanár neve: " + x.Name + " --- " + "Kora :" + x.Age + " --- " + "ID :" + x.TeacherID));
             Teacher newTeacher = new Teacher();
 
             Console.WriteLine("Adja meg a tanár nevét");
