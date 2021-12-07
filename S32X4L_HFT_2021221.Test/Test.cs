@@ -92,7 +92,7 @@ namespace S32X4L_HFT_2021221.Test
             var firstteacher = teacherLogic.ReadOneTeacher(1);
 
             Assert.That(firstteacher.Name, Is.EqualTo(name));
-        } //1
+        } 
         [Test]
 
 
@@ -109,7 +109,7 @@ namespace S32X4L_HFT_2021221.Test
 
             Assert.That(heldcourses.Count(), Is.EqualTo(4));
 
-        }        //2
+        }        
 
         [Test]
        
@@ -125,7 +125,7 @@ namespace S32X4L_HFT_2021221.Test
 
             Assert.That(coursescredit.Count(), Is.EqualTo(4));
 
-        }      //3
+        }      
 
         [Test]
 
@@ -134,7 +134,7 @@ namespace S32X4L_HFT_2021221.Test
           
             Assert.That(studentsLogic.ReadAllStudents().Count() == 6);
             ;
-        }           //4
+        }           
 
         [Test]
         [TestCase(1)]
@@ -142,12 +142,12 @@ namespace S32X4L_HFT_2021221.Test
         {
 
             Assert.That(studentsLogic.GetMaxCreditStudent().ToList().Count, Is.EqualTo(count));
-        }                   //5
+        }                   
 
         [Test]
         [TestCase(1)]
 
-        public void Delete_Subject_not_throws_exception(int id)  //6
+        public void Delete_Subject_not_throws_exception(int id)  
         {
 
             Assert.That(() => subjectsLogic.DeleteSubject(id), Throws.Nothing);
@@ -155,21 +155,21 @@ namespace S32X4L_HFT_2021221.Test
 
         [Test]
         [TestCase(1)]
-        public void Test_ReadOne_Is_Not_Return_With_null(int id) //7
+        public void Test_ReadOne_Is_Not_Return_With_null(int id) 
         {
 
             Assert.That(subjectsLogic.ReadOneSubject(id), Is.Not.Null);
         }
 
         [Test]
-        public void Read_One_Subject_IsWorking() //8
+        public void Read_One_Subject_IsWorking() 
         {
             Assert.That(subjectsLogic.ReadOneSubject(1).SubjectID, Is.EqualTo(1));
             Assert.That(subjectsLogic.ReadOneSubject(1).Credit, Is.EqualTo(6));
 
         }
         [Test]
-        public void Read_One_Subject_IsNotWorking_With_False_Data() //9
+        public void Read_One_Subject_IsNotWorking_With_False_Data() 
         {
             Assert.That(subjectsLogic.ReadOneSubject(1).SubjectID, Is.Not.EqualTo(2));
             Assert.That(subjectsLogic.ReadOneSubject(1).Credit, Is.Not.EqualTo(7));
@@ -177,7 +177,7 @@ namespace S32X4L_HFT_2021221.Test
         }
 
         [Test]
-        public void Teacher_Courses_Count()//10
+        public void Teacher_Courses_Count()
         {
             var readed = subjectsLogic.GetCoursesFromSubjects();
             List<CoursesCountFromSubjects> subjects = new List<CoursesCountFromSubjects>();
