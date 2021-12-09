@@ -1,5 +1,6 @@
 ﻿using S32X4L_HFT_2021221.Models;
 using S32X4L_HFT_2021221.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,7 +41,11 @@ namespace S32X4L_HFT_2021221.Logic
         }
         public Courses ReadOneCourse(int id)
         {
-            return courseRepo.ReadOne(id);
+            if (id > courseRepo.GetAll().Count())
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else return courseRepo.ReadOne(id);
         }
         public IQueryable<Courses> GetAllCourses()
         {
@@ -50,7 +55,11 @@ namespace S32X4L_HFT_2021221.Logic
         }
         public void DeleteCourse(int id)
         {
-            courseRepo.Delete(id);
+            if (id> courseRepo.GetAll().Count())
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+           else  courseRepo.Delete(id);
         }
         void ICoursesLogic.UdpateCourseName(Courses courses)
         {

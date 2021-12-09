@@ -1,5 +1,6 @@
 ﻿using S32X4L_HFT_2021221.Models;
 using S32X4L_HFT_2021221.Repository;
+using System;
 using System.Linq;
 
 namespace S32X4L_HFT_2021221.Logic
@@ -21,11 +22,16 @@ namespace S32X4L_HFT_2021221.Logic
         }
         public void CreateTeacher(Teacher teacher)
         {
+
             TeacherRepository.Create(teacher);
         }
         public Teacher ReadOneTeacher(int id)
         {
-            return TeacherRepository.ReadOne(id);
+            if (id == 0 || id > TeacherRepository.GetAll().Count())
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else return TeacherRepository.ReadOne(id);
         }
         public IQueryable<Teacher> ReadAllTeacher()
         {
@@ -33,7 +39,11 @@ namespace S32X4L_HFT_2021221.Logic
         }
         public void DeleteTeacher(int id)
         {
-            TeacherRepository.Delete(id);
+            if (id == 0 || id > TeacherRepository.GetAll().Count())
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else TeacherRepository.Delete(id);
         }
         public void UpdateTeacherProps(Teacher teacher)
         {

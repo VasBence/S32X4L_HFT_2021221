@@ -19,6 +19,9 @@ namespace S32X4L_HFT_2021221.Client
         }
         static void ReadOneCourse()
         {
+            Console.WriteLine("Az összes kurzus:");
+            var getcourses = rest.Get<Courses>("courses");
+            getcourses.ForEach(x => Console.WriteLine("Kurzus neve: " + x.CourseName + "---" + "Kurzus ID:" + x.CourseID));
             Console.WriteLine("Írja be az egyik kurzus ID-t");
             int id = int.Parse(Console.ReadLine());
             string constring = "courses/" + Convert.ToString(id);
@@ -126,6 +129,10 @@ namespace S32X4L_HFT_2021221.Client
         }
         static void ReadOneSubject()
         {
+            Console.WriteLine("Az összes tárgy:");
+            var getsubjects = rest.Get<Subjects>("subjects");
+            getsubjects.ForEach(x => Console.WriteLine("Tárgy neve: " + x.Name + "---" + "Tárgy ID: " + x.SubjectID));
+            Console.ReadKey();
             Console.WriteLine("Írja be az egyik tárgy ID-t");
             int id = int.Parse(Console.ReadLine());
             string constring = "subjects/" + Convert.ToString(id);
@@ -145,16 +152,11 @@ namespace S32X4L_HFT_2021221.Client
             Console.WriteLine();
 
             var subject = rest.GetByInt<Subjects>(SubjectID, "subjects");
-            if (subject == null)
-            {
-                throw new Exception();
-            }
-            else
-            {
-                rest.Delete(SubjectID, "subjects");
 
-                Console.WriteLine("A tárgy sikeresen törölve lett az adatbázisból :)");
-            }
+            rest.Delete(SubjectID, "subjects");
+
+            Console.WriteLine("A tárgy sikeresen törölve lett az adatbázisból :)");
+
             Console.ReadKey();
         }
         static void AddSubject()
@@ -202,7 +204,7 @@ namespace S32X4L_HFT_2021221.Client
             Console.ReadKey();
         }
 
- 
+
 
 
         #endregion
@@ -346,6 +348,10 @@ namespace S32X4L_HFT_2021221.Client
         }
         static void ReadOneTeacher()
         {
+            Console.WriteLine("Az összes tanár:");
+            var getTeachers = rest.Get<Teacher>("teacher");
+            getTeachers.ForEach(x => Console.WriteLine("Tanár neve: " + x.Name +"---" + "Tárgy ID: " + x.TeacherID));
+
             Console.WriteLine("Írja be az egyik Tanár ID-t");
             int id = int.Parse(Console.ReadLine());
             string constring = "teacher/" + Convert.ToString(id);
@@ -383,7 +389,7 @@ namespace S32X4L_HFT_2021221.Client
             getTeacher.ForEach(x => Console.WriteLine("Tanár neve: " + x.Name + " --- " + "Tanár ID: " + x.TeacherID));
 
 
-            Console.WriteLine("Írja be annak a tanulónak a neptunkódját akinek a nevét át szeretné írni");
+            Console.WriteLine("Írja be annak a tanárnak az ID-ját akinek a nevét át szeretné írni");
             int id = int.Parse(Console.ReadLine());
             var get = rest.GetByInt<Teacher>(id, "teacher");
 
@@ -447,7 +453,6 @@ namespace S32X4L_HFT_2021221.Client
            .Add("tárgy törlése.", () => DeleteSubject())
            .Add("Tárgy hozzáadása.", () => AddSubject())
            .Add("Tárgy adatainak változtatása.", () => ChangeSubjectProps())
- 
             .Add("Vissza", ConsoleMenu.Close);
 
             ConsoleMenu teacherMenu = new ConsoleMenu(args, 1)
@@ -455,7 +460,7 @@ namespace S32X4L_HFT_2021221.Client
            .Add("Egy tanár beolvasása.", () => ReadOneTeacher())
            .Add("Tanár törlése.", () => DeleteTeacher())
            .Add("Tanár hozzáadása.", () => AddTeacher())
-           .Add("Tanár nevének változtatása.", () => ChangeTeacherProps())
+           .Add("Tanár tulajdonságainak változtatása.", () => ChangeTeacherProps())
             .Add("Vissza", ConsoleMenu.Close);
 
             ConsoleMenu studentMenu = new ConsoleMenu(args, 1)

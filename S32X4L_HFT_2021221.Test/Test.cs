@@ -83,12 +83,12 @@ namespace S32X4L_HFT_2021221.Test
         }
 
         [Test]
-        [TestCase("Kovács András")]
-        public void Test_FirstTeacher_IsRight_InDatabase(string name)
+      
+        public void Test_FirstTeacher_IsRight_InDatabase()
         {
             var firstteacher = teacherLogic.ReadOneTeacher(1);
 
-            Assert.That(firstteacher.Name, Is.EqualTo(name));
+            Assert.That(firstteacher.Name, Is.EqualTo("Kovács András"));
         }
 
         [Test]
@@ -129,32 +129,53 @@ namespace S32X4L_HFT_2021221.Test
         }
 
         [Test]
-        [TestCase(1)]
-        public void GetMaxCredit_Count_Is_One(int count)
+        
+        public void GetMaxCredit_Count_Is_One()
         {
 
-
-            Assert.That(studentsLogic.GetMaxCreditStudent().ToList().Count, Is.EqualTo(count));
+            Assert.That(studentsLogic.GetMaxCreditStudent().ToList().Count, Is.EqualTo(1));
         }
 
         [Test]
-        [TestCase(1)]
-
-        public void Delete_Subject_not_throws_exception(int id)
+        public void DeleteSubject_throws_exception_with_false_id()
         {
-            Assert.That(() => subjectsLogic.DeleteSubject(id), Throws.Nothing);
+            Assert.That(() => subjectsLogic.DeleteSubject(5), Throws.Exception);
+        }
+        [Test]
+        [TestCase(null)]
+        [TestCase("")]
+        public void DeleteStudent_throws_exception_with_false_data(string str)
+        {
+            Assert.That(() => studentsLogic.DeleteStudent(str), Throws.Exception);
+        }
+        [Test]
+        [TestCase(4)]
+        [TestCase(6)]
+        [TestCase(5)]
+        public void DeleteCourses_and_ReadCourses_Throws_Exception_With_False_Data(int id )
+        {
+            if (id > 4)
+            {
+                Assert.That(() => coursesLogic.DeleteCourse(id), Throws.Exception);
+                Assert.That(() => coursesLogic.ReadOneCourse(id), Throws.Exception);
+            }
+            else
+            {
+                Assert.That(() => coursesLogic.DeleteCourse(id), Throws.Nothing);
+                Assert.That(() => coursesLogic.ReadOneCourse(id), Throws.Nothing);
+            }
+
+        }
+        [Test]
+       
+        public void Test_ReadOne_Is_Not_Return_With_null()
+        {
+
+            Assert.That(subjectsLogic.ReadOneSubject(1), Is.Not.Null);
         }
 
         [Test]
-        [TestCase(1)]
-        public void Test_ReadOne_Is_Not_Return_With_null(int id)
-        {
-
-            Assert.That(subjectsLogic.ReadOneSubject(id), Is.Not.Null);
-        }
-
-        [Test]
-        public void Read_One_Subject_Is_Reading_Right_Values()
+        public void ReadOneSubject_Is_Reading_Right_Values()
         {
             Assert.That(subjectsLogic.ReadOneSubject(1).SubjectID, Is.EqualTo(1));
             Assert.That(subjectsLogic.ReadOneSubject(1).Credit, Is.EqualTo(6));
@@ -162,12 +183,20 @@ namespace S32X4L_HFT_2021221.Test
         }
 
         [Test]
-        public void ReadOneSubject_Not_Returns_False_Values()
+        
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        public void ReadOneSubject_Throws_Exception_With_False_Data(int id)
         {
-            Assert.That(subjectsLogic.ReadOneSubject(1).SubjectID, Is.Not.EqualTo(2));
-            Assert.That(subjectsLogic.ReadOneSubject(1).Credit, Is.Not.EqualTo(7));
-
-
+            if (id >=3)
+            {
+                Assert.That(() => subjectsLogic.ReadOneSubject(id), Throws.Exception);
+            }
+            else
+            {
+                Assert.That(() => subjectsLogic.ReadOneSubject(id), Throws.Nothing);
+            }
 
         }
 

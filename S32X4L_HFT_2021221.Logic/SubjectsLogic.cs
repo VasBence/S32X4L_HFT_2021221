@@ -1,5 +1,6 @@
 ﻿using S32X4L_HFT_2021221.Models;
 using S32X4L_HFT_2021221.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,17 +31,29 @@ namespace S32X4L_HFT_2021221.Logic
         {
             subjectsRepo.Create(subject);
         }
-        public Subjects ReadOneSubject(int id)
-        {
-            return subjectsRepo.ReadOne(id);
-        }
+      
         public IQueryable<Subjects> ReadAllSubjects()
         {
             return subjectsRepo.GetAll();
         }
+        public Subjects ReadOneSubject(int id)
+        {
+            if (id == 0 || id > subjectsRepo.GetAll().Count())
+            {
+                throw new ArgumentOutOfRangeException();
+
+            }
+            return subjectsRepo.ReadOne(id);
+        }
         public void DeleteSubject(int id)
         {
-            subjectsRepo.Delete(id);
+            if (id == 0 || id > subjectsRepo.GetAll().Count())
+            {
+                throw new ArgumentOutOfRangeException();
+
+            }
+            else subjectsRepo.Delete(id);       
+         
         }
         public void UpdateSubjectProps(Subjects subjects)
         {

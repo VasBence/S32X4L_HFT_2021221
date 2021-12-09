@@ -1,5 +1,6 @@
 ﻿using S32X4L_HFT_2021221.Models;
 using S32X4L_HFT_2021221.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,7 +41,11 @@ namespace S32X4L_HFT_2021221.Logic
         }
         public Students ReadOneStudent(string id)
         {
-            return studentsRepository.ReadOne(id);
+            if (id == null)
+            {
+                throw new ArgumentNullException();
+            }
+            else return studentsRepository.ReadOne(id);
         }
         public IQueryable<Students> ReadAllStudents()
         {
@@ -48,8 +53,11 @@ namespace S32X4L_HFT_2021221.Logic
         }
         public void DeleteStudent(string id)
         {
-
-            studentsRepository.Delete(id);
+            if (id == null|| id =="")
+            {
+                throw new ArgumentNullException();
+            }
+            else studentsRepository.Delete(id);
         }
 
         public void UpdateStudentProps(Students students)
