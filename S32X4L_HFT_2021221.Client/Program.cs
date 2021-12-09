@@ -202,12 +202,7 @@ namespace S32X4L_HFT_2021221.Client
             Console.ReadKey();
         }
 
-        static void GetCoursesCountFromSubjects()
-        {
-            var courses = rest.Get<CoursesCountFromSubjects>("stat/GetCreditPerCourses");
-            courses.ForEach(x => Console.WriteLine(x.Name + " --- " + x.Count));
-            Console.ReadKey();
-        }
+ 
 
 
         #endregion
@@ -452,7 +447,7 @@ namespace S32X4L_HFT_2021221.Client
            .Add("tárgy törlése.", () => DeleteSubject())
            .Add("Tárgy hozzáadása.", () => AddSubject())
            .Add("Tárgy adatainak változtatása.", () => ChangeSubjectProps())
-           .Add("Megadja, hogy egy tárgynak hány kurzusa van",()=>GetCoursesCountFromSubjects())
+ 
             .Add("Vissza", ConsoleMenu.Close);
 
             ConsoleMenu teacherMenu = new ConsoleMenu(args, 1)

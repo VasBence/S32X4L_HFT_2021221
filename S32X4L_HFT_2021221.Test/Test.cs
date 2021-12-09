@@ -121,7 +121,7 @@ namespace S32X4L_HFT_2021221.Test
         }
 
         [Test]
-        public void GetAllMethod_Is_Reading_Every_Objects()
+        public void ReadAllStudents_Is_Reading_Every_Objects()
         {
 
             Assert.That(studentsLogic.ReadAllStudents().Count() == 6);
@@ -154,17 +154,15 @@ namespace S32X4L_HFT_2021221.Test
         }
 
         [Test]
-        public void Read_One_Subject_IsWorking()
+        public void Read_One_Subject_Is_Reading_Right_Values()
         {
             Assert.That(subjectsLogic.ReadOneSubject(1).SubjectID, Is.EqualTo(1));
             Assert.That(subjectsLogic.ReadOneSubject(1).Credit, Is.EqualTo(6));
 
-
-
         }
 
         [Test]
-        public void ReadOneSubject_Is_Not_Working_With_False_Values()
+        public void ReadOneSubject_Not_Returns_False_Values()
         {
             Assert.That(subjectsLogic.ReadOneSubject(1).SubjectID, Is.Not.EqualTo(2));
             Assert.That(subjectsLogic.ReadOneSubject(1).Credit, Is.Not.EqualTo(7));
@@ -174,16 +172,10 @@ namespace S32X4L_HFT_2021221.Test
         }
 
         [Test]
-        public void TeacherCoursesCount_method_test()
+        public void ReadAllSubjects_Working()
         {
-            var readed = subjectsLogic.GetCoursesFromSubjects();
-            List<CoursesCountFromSubjects> subjects = new List<CoursesCountFromSubjects>();
-            foreach (var subject in readed)
-            {
-                subjects.Add(subject);
-            }
-
-            Assert.That(subjects.Count(), Is.EqualTo(2));
+            var readed = subjectsLogic.ReadAllSubjects();         
+            Assert.That(readed.Count(), Is.EqualTo(2));
         }
 
         [Test]

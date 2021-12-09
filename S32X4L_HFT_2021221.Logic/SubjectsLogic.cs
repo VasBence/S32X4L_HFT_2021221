@@ -14,7 +14,6 @@ namespace S32X4L_HFT_2021221.Logic
 
         void UpdateSubjectProps(Subjects subjects);
 
-        public IEnumerable<CoursesCountFromSubjects> GetCoursesFromSubjects();
     }
 
     public class SubjectsLogic : ISubjectsLogic
@@ -46,24 +45,6 @@ namespace S32X4L_HFT_2021221.Logic
         public void UpdateSubjectProps(Subjects subjects)
         {
             subjectsRepo.UpdateSubjectProps(subjects);
-        }
-
-
-
-        public IEnumerable<CoursesCountFromSubjects> GetCoursesFromSubjects()
-        {
-            var readedRepo = subjectsRepo.GetAll();
-            var coursescount = readedRepo.Where(x => x.SubjectCourses.Count != 0).Select(x => new CoursesCountFromSubjects
-            {
-                Count = x.SubjectCourses.Count,
-                Name = x.Name
-            });
-
-
-
-
-
-            return coursescount;
         }
 
 

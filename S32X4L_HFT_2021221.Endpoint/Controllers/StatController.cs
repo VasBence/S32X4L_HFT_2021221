@@ -27,11 +27,7 @@ namespace S32X4L_HFT_2021221.Endpoint.Controllers
         {
             return coursesLogic.HeldCoursesByTeachers();
         }
-        [HttpGet]
-        public IEnumerable<CoursesCountFromSubjects> GetCoursesFromSubjects()
-        {
-            return subjectsLogic.GetCoursesFromSubjects();
-        }
+        
         [HttpGet]
         public IEnumerable<string> GetMaxCreditStudent()
         {
