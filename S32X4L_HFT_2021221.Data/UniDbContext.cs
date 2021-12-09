@@ -33,7 +33,7 @@ namespace S32X4L_HFT_2021221.Data
                 .HasMany(subjects => subjects.SubjectCourses)
                 .WithOne(courses => courses.Subjects)
                 .HasForeignKey(subjects => subjects.CourseID)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             });
@@ -54,19 +54,19 @@ namespace S32X4L_HFT_2021221.Data
                 entity
                 .HasMany(courses => courses.Students)
                 .WithOne(students => students.JoinedCourse)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
                 entity
                 .HasOne(courses => courses.Subjects)
                 .WithMany(subjects => subjects.SubjectCourses)
                 .HasForeignKey(courses => courses.SubjectID)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
                 entity
                 .HasOne(courses => courses.Teacher)
                 .WithMany(teacher => teacher.HeldCourses)
                 .HasForeignKey(courses => courses.TeacherID)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             });
 
