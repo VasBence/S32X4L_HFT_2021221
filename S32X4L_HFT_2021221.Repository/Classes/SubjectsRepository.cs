@@ -33,7 +33,7 @@ namespace S32X4L_HFT_2021221.Repository
         {
             var oldSubject = ReadOne(subjects.SubjectID);
             oldSubject.Name = subjects.Name;
-            oldSubject.Credit = oldSubject.Credit;
+            oldSubject.Credit = subjects.Credit;
 
 
             db.SaveChanges();

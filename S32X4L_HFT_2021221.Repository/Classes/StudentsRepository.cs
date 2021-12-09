@@ -37,6 +37,7 @@ namespace S32X4L_HFT_2021221.Repository
             oldStudent.Name = students.Name;
             oldStudent.Age = students.Age;
             oldStudent.AcquiredCredtis = students.AcquiredCredtis;
+            db.SaveChanges();
 
         }
 
