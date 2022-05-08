@@ -1,0 +1,53 @@
+﻿<Page x:Class="S32X4L_HFT_2021221.WPFClient.Windows.StudentWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"      
+            xmlns:local2="clr-namespace:S32X4L_HFT_2021221.WPFClient.ViewModel"
+
+
+    mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Page.DataContext>
+        <local2:StudentViewModel></local2:StudentViewModel>
+    </Page.DataContext>
+        <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedStudent}" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <StackPanel>
+                            <Label Content="{Binding Name}" ContentStringFormat="Név: {0}" />
+                            <Label Content="{Binding NeptunCode}" ContentStringFormat="NeptunKód: {0}"/>
+                            <Label Content="{Binding Age}" ContentStringFormat="Kor: {0}"/>
+                            <Label Content="{Binding AcquiredCredtis}" ContentStringFormat="Elért kredit: {0}"/>
+                        </StackPanel>
+                    </Border>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1">
+            <Label Content="Név" Background="LightBlue" Padding="3" HorizontalContentAlignment="Center"/>
+            <TextBox Text="{Binding SelectedStudent.Name}" Padding="3" Margin="0,0,0,15" />
+            <Label Content="Neptunkód" Background="LightBlue" Padding="3" HorizontalContentAlignment="Center" />
+            <TextBox Text="{Binding SelectedStudent.NeptunCode}" Padding="3" Margin="0,0,0,15" />
+            <Label Content="Kor" Background="LightBlue" Padding="3" HorizontalContentAlignment="Center" />
+            <TextBox Text="{Binding SelectedStudent.Age}" Padding="3" Margin="0,0,0,15" />
+            <Label Content="Kurzus ID (MAX 4)" Background="LightBlue" Padding="3" HorizontalContentAlignment="Center" />
+            <TextBox Text="{Binding SelectedStudent.JoinedCourseID}" Padding="3" Margin="0,0,0,15" />
+            <Label Content="Megszerzett kredit" Background="LightBlue" Padding="3" HorizontalContentAlignment="Center" />
+            <TextBox Text="{Binding SelectedStudent.AcquiredCredtis}" Padding="3" Margin="0,0,0,15" />
+            <StackPanel >
+                <Button Content="Tanuló létrehozása" Command="{Binding CreateStudentCommand}" Margin="10" />
+                <Button Content="Tanuló törlése" Command="{Binding DeleteStudentCommand}" Margin="10" />
+                <Button Content="Tanuló frissítése" Command="{Binding EditStudentCommand}" Margin="10" />
+            </StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,43 @@
+﻿* {
+    font-family: Calibri;
+}
+
+table {
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 5px;
+    text-align: center;
+}
+
+th {
+    background-color: lightblue;
+}
+
+#formdiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+    #formdiv label, button, input {
+        margin: 5px;
+        padding: 5px;
+    }
+
+    #formdiv label {
+        font-weight: bolder;
+    }
+
+table button {
+    padding: 2px;
+}

@@ -1,0 +1,49 @@
+﻿<Page x:Class="S32X4L_HFT_2021221.WPFClient.Windows.TeacherWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:local2="clr-namespace:S32X4L_HFT_2021221.WPFClient.ViewModel"
+        
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Page.DataContext>
+        <local2:TeacherViewModel></local2:TeacherViewModel>
+    </Page.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Teachers}" SelectedItem="{Binding SelectedTeacher}" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <StackPanel>
+                            <Label Content="{Binding Name}" ContentStringFormat="Név: {0}" />
+                            <Label Content="{Binding Age}" ContentStringFormat="Kor: {0}"/>
+                            <Label Content="{Binding TeacherID}" ContentStringFormat="Tanár ID: {0}"/>
+
+                        </StackPanel>
+                    </Border>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1">
+            <Label Content="Név" Background="LightBlue" Padding="3" HorizontalContentAlignment="Center"/>
+            <TextBox Text="{Binding SelectedTeacher.Name}" Padding="3" Margin="0,0,0,15" />
+            <Label Content="Kor" Background="LightBlue" Padding="3" HorizontalContentAlignment="Center" />
+            <TextBox Text="{Binding SelectedTeacher.Age}" Padding="3" Margin="0,0,0,15" />
+            
+
+
+            <StackPanel>
+                <Button Content="Tanár hozzáadása" Command="{Binding CreateTeacherCommand}" Margin="10" />
+                <Button Content="Tanár törlése" Command="{Binding DeleteTeacherCommand}" Margin="10" />
+                <Button Content="Tanár frissítése" Command="{Binding EditTeacherCommand}" Margin="10"  />
+            </StackPanel>
+     
+        </StackPanel>
+    </Grid>
+</Page>

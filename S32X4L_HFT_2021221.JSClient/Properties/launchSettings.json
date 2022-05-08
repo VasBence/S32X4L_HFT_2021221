@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:6111",
+      "applicationUrl": "http://localhost:42827",
       "sslPort": 0
     }
   },
@@ -11,15 +11,16 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "teacher",
+       "launchUrl": "index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "S32X4L_HFT_2021221.Endpoint": {
+    "S32X4L_HFT_2021221.JSClient": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
+      "launchUrl":"index.html",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
